@@ -7,7 +7,7 @@ export const navigation = [
   {
     text: 'Operations',
     icon: 'more',
-    path: '/operation'
+    path: '/operations'
   },
   {
     text: 'Reports',

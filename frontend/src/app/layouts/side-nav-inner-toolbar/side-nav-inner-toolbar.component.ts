@@ -1,6 +1,7 @@
 import {Component, NgModule, OnInit} from '@angular/core';
 import {DxDrawerModule, DxScrollViewModule, DxToolbarModule, DxTreeViewModule} from 'devextreme-angular';
 import {navigation} from '../../app-navigation';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-side-nav-inner-toolbar',
@@ -11,7 +12,7 @@ export class SideNavInnerToolbarComponent implements OnInit {
 
   items: { text: string; path: string; icon: string; }[];
 
-  constructor() {
+  constructor(private router: Router) {
     this.items = navigation;
   }
 
@@ -19,6 +20,10 @@ export class SideNavInnerToolbarComponent implements OnInit {
     console.log('H');
   }
 
+  changeNavigation(event) {
+    const path = event.itemData.path;
+    this.router.navigate([path]);
+  }
 
 }
 

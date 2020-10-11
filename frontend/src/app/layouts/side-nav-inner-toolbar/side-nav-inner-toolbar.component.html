@@ -23,6 +23,7 @@
         keyExpr="path"
         selectionMode="single"
         [focusStateEnabled]="false"
+        (onItemClick)="changeNavigation($event)"
         expandEvent="click"
         width="100%">
       </dx-tree-view>
