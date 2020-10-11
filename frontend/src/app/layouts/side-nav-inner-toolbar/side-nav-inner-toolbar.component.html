@@ -1,0 +1,38 @@
+<dx-drawer
+  opened="true"
+  position="before">
+  <div class="navigation-bar"
+       *dxTemplate="let dataMenu of 'panel'">
+    <dx-toolbar id="navigation-header">
+  <!--    <dxi-item-->
+  <!--      location="before"-->
+  <!--      cssClass="menu-button"-->
+  <!--      widget="dxButton"-->
+  <!--      [options]="{-->
+  <!--            stylingMode: 'text'-->
+  <!--          }">-->
+  <!--    </dxi-item>-->
+      <dxi-item
+        location="before"
+        [text]="'Menu'">
+      </dxi-item>
+    </dx-toolbar>
+    <div class="menu-container">
+      <dx-tree-view
+        [items]="items"
+        keyExpr="path"
+        selectionMode="single"
+        [focusStateEnabled]="false"
+        expandEvent="click"
+        width="100%">
+      </dx-tree-view>
+    </div>
+  </div>
+  <div class="container">
+    <dx-scroll-view class="layout-body">
+      <div class="content">
+        <ng-content></ng-content>
+      </div>
+    </dx-scroll-view>
+  </div>
+</dx-drawer>
