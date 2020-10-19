@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {SideNavInnerToolbarModule} from './layouts';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import {SideNavInnerToolbarModule} from './layouts';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SideNavInnerToolbarModule
+    SideNavInnerToolbarModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

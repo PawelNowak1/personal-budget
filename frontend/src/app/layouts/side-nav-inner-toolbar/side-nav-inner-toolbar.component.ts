@@ -2,6 +2,7 @@ import {Component, NgModule, OnInit} from '@angular/core';
 import {DxDrawerModule, DxScrollViewModule, DxToolbarModule, DxTreeViewModule} from 'devextreme-angular';
 import {navigation} from '../../app-navigation';
 import {Router} from '@angular/router';
+import {formatMessage} from 'devextreme/localization';
 
 @Component({
   selector: 'app-side-nav-inner-toolbar',
@@ -11,13 +12,13 @@ import {Router} from '@angular/router';
 export class SideNavInnerToolbarComponent implements OnInit {
 
   items: { text: string; path: string; icon: string; }[];
+  formatMessage = formatMessage;
 
   constructor(private router: Router) {
     this.items = navigation;
   }
 
   ngOnInit(): void {
-    console.log('H');
   }
 
   changeNavigation(event) {

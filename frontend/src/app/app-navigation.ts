@@ -1,21 +1,21 @@
 export const navigation = [
   {
-    text: 'Home',
+    text: 'Strona domowa',
     path: '/home',
     icon: 'home'
   },
   {
-    text: 'Operations',
+    text: 'Operacje',
     icon: 'more',
     path: '/operations'
   },
   {
-    text: 'Reports',
+    text: 'Raporty',
     icon: 'chart',
     path: '/reports'
   },
   {
-    text: 'Categories',
+    text: 'Kategorie',
     icon: 'orderedlist',
     path: '/categories'
   }

@@ -4,6 +4,7 @@ import {HomeComponent} from './pages/home/home.component';
 import {CategoriesComponent} from './pages/categories/categories.component';
 import {ReportsComponent} from './pages/reports/reports.component';
 import {OperationsComponent} from './pages/operations/operations.component';
+import {DxCalendarModule, DxDateBoxModule} from 'devextreme-angular';
 
 const routes: Routes = [
   {
@@ -29,7 +30,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), DxCalendarModule, DxDateBoxModule],
   exports: [RouterModule],
   declarations: [HomeComponent, CategoriesComponent, ReportsComponent, OperationsComponent]
 })
