@@ -5,6 +5,11 @@ plugins {
 	id("io.spring.dependency-management") version "1.0.10.RELEASE"
 	kotlin("jvm") version "1.3.72"
 	kotlin("plugin.spring") version "1.3.72"
+	id("org.jetbrains.kotlin.plugin.noarg") version "1.3.72"
+}
+
+noArg {
+	annotation("javax.persistence.Entity")
 }
 
 group = "com.pnowak.personalbudget"
@@ -19,9 +24,14 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.security:spring-security-test")
+	implementation("io.jsonwebtoken:jjwt:0.9.1")
 	implementation("org.postgresql:postgresql")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	//implementation("io.springfox:springfox-swagger2:2.7.0")
+	//implementation("io.springfox:springfox-swagger2:2.7.0")
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
@@ -37,3 +47,5 @@ tasks.withType<KotlinCompile> {
 		jvmTarget = "11"
 	}
 }
+
+
