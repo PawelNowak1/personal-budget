@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {loadMessages, locale} from 'devextreme/localization';
 import config from 'devextreme/core/config';
+import {AuthService} from './shared/services';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import config from 'devextreme/core/config';
 export class AppComponent {
   title = 'frontend';
 
-  constructor(private http: HttpClient) {
+  constructor(private authService: AuthService, private http: HttpClient) {
     this.http.get('assets/locale/pl.json').subscribe(result => this.initMessages(result));
   }
 
@@ -20,5 +21,9 @@ export class AppComponent {
     loadMessages(result);
     locale('pl');
     config({ defaultCurrency: 'PLN' });
+  }
+
+  isAutorized() {
+    return this.authService.loggedIn;
   }
 }

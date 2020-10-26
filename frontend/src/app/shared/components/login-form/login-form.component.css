@@ -1,0 +1,20 @@
+.login-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.title {
+  color: #03a9f4;
+  font-weight: bold;
+  font-size: 30px;
+  margin: 0;
+}
+.dx-card {
+  width: 330px;
+  margin: 100px auto auto auto;
+  padding: 40px;
+}
+:host {
+  width: 100%;
+  height: 100%;
+}

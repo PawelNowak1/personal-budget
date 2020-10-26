@@ -13,7 +13,15 @@
         "Reports": "Raporty",
         "Home": "Strona domowa",
         "Operations": "Operacje",
-        "dxCollectionWidget-noDataText": "Pas de données",
+        "Password": "Hasło",
+        "Email": "Email",
+        "Sign In to your account": "Zaloguj się do swojego konta",
+        "Password is required": "Hasło jest wymagane",
+        "Email is required": "Email jest wymagany",
+        "Forgot password?": "Zapomniałeś hasła?",
+        "Create an account": "Utwórz konto",
+
+       "dxCollectionWidget-noDataText": "Pas de données",
 
         "dxDropDownEditor-selectLabel": "Sélection",
 
