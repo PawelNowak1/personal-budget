@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {SideNavInnerToolbarModule} from './layouts';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {LoginFormModule} from './shared/components';
 import {
   DxButtonModule,
@@ -15,6 +15,7 @@ import {
 } from 'devextreme-angular';
 import {AuthService} from './shared/services';
 import {AppInfoService} from './shared/services/app-info.service';
+import {AuthInterceptor} from './shared/interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import {AppInfoService} from './shared/services/app-info.service';
     LoginFormModule,
     DxScrollViewModule
   ],
-  providers: [AuthService, AppInfoService],
+  providers: [AuthService, AppInfoService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -31,3 +31,7 @@
   height: 100%;
   width: 200px !important;
 }
+
+::ng-deep .dx-toolbar-items-container {
+  background-color: #f2f2f2;
+}

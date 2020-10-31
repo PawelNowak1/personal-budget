@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {HomeService} from './home.service';
 
 @Component({
   templateUrl: './home.component.html',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent  {
 
-  constructor() { }
+  constructor(private homeService: HomeService) {
+  }
 }

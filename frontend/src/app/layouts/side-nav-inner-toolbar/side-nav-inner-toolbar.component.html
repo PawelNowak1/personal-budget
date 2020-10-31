@@ -4,17 +4,18 @@
   <div class="navigation-bar"
        *dxTemplate="let dataMenu of 'panel'">
     <dx-toolbar id="navigation-header">
-  <!--    <dxi-item-->
-  <!--      location="before"-->
-  <!--      cssClass="menu-button"-->
-  <!--      widget="dxButton"-->
-  <!--      [options]="{-->
-  <!--            stylingMode: 'text'-->
-  <!--          }">-->
-  <!--    </dxi-item>-->
       <dxi-item
         location="before"
-        [text]="'Menu'">
+        cssClass="menu-button"
+        widget="dxButton"
+        [options]="{
+                    icon: 'menu',
+              stylingMode: 'text'
+            }">
+      </dxi-item>
+      <dxi-item
+        location="center"
+        [text]="'Budżet domowy'">
       </dxi-item>
     </dx-toolbar>
     <div class="menu-container">

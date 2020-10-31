@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {HttpHelper} from './http-helper';
 
-const defaultPath = '/';
+const defaultPath = '/home';
 
 @Injectable()
 export class AuthService {
@@ -15,11 +17,16 @@ export class AuthService {
     this._lastAuthenticatedPath = value;
   }
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private http: HttpClient) { }
 
   logIn(login: string, password: string) {
-    this._loggedIn = true;
-    this.router.navigate([this._lastAuthenticatedPath]);
+    this.http.post(`${HttpHelper.baseURL}/login`, {username: login, password})
+      .subscribe((result: any) => {
+        localStorage.setItem('id_token', result.token);
+        this._loggedIn = true;
+        this.router.navigate([this._lastAuthenticatedPath]);
+      });
+    this._loggedIn = false;
   }
 
   logOut() {
