@@ -48,7 +48,7 @@ class WebSecurityConfiguration(private val userDetailsService: UserDetailsServic
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeRequests().antMatchers("/login", "/v2/api-docs",
+                .authorizeRequests().antMatchers("/login", "/registration", "/v2/api-docs",
                         "/configuration/ui",
                         "/swagger-resources/**",
                         "/configuration/security",

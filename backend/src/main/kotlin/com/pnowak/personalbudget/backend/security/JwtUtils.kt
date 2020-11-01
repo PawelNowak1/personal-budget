@@ -22,6 +22,15 @@ class JwtUtils {
                 .compact()
     }
 
+    fun generateJwtToken(userName: String?): String {
+        return Jwts.builder()
+                .setSubject(userName)
+                .setIssuedAt(Date())
+                .setExpiration(Date(Date().time + JWT_EXPIRATION))
+                .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
+                .compact()
+    }
+
     fun getUsernameFromJwtToken(token: String?): String {
         return Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token).getBody().getSubject()
     }

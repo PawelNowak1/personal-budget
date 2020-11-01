@@ -5,7 +5,7 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
-class MyUserDetails(val id: Long, private val username: String, val email: String, private val password: String, val active: Boolean, private val authority: GrantedAuthority) : UserDetails {
+class MyUserDetails(val id: Long?, private val username: String?, val email: String?, private val password: String, val active: Boolean, private val authority: GrantedAuthority) : UserDetails {
     override fun getAuthorities(): Collection<GrantedAuthority> {
         return listOf(authority)
     }
@@ -14,7 +14,7 @@ class MyUserDetails(val id: Long, private val username: String, val email: Strin
         return password
     }
 
-    override fun getUsername(): String {
+    override fun getUsername(): String? {
         return username
     }
 

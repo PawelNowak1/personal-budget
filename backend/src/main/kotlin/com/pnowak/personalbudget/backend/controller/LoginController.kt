@@ -5,6 +5,8 @@ import com.pnowak.personalbudget.backend.dto.LoginRequest
 import com.pnowak.personalbudget.backend.dto.MyUserDetails
 import com.pnowak.personalbudget.backend.repository.UserRepository
 import com.pnowak.personalbudget.backend.security.JwtUtils
+import com.pnowak.personalbudget.backend.service.impl.AuthenticationServiceImpl
+import com.pnowak.personalbudget.backend.service.interfaces.AuthenticationService
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -17,39 +19,16 @@ import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import kotlin.math.log
 
 @CrossOrigin(origins = ["*"], maxAge = 3600)
 @Controller
 @RequestMapping("/login")
-class LoginController(val authenticationManager: AuthenticationManager,
-                      val jwtUtils: JwtUtils) {
+class LoginController(val authenticationService: AuthenticationServiceImpl) {
 
     @PostMapping
     open fun authenticateUser(@RequestBody loginRequest: LoginRequest?): ResponseEntity<*>? {
-        var authentication: Authentication? = null
-        if (loginRequest != null) {
-            authentication = try {
-                authenticationManager.authenticate(
-                        UsernamePasswordAuthenticationToken(loginRequest.username, loginRequest.password))
-            } catch (e: AuthenticationException) {
-                return ResponseEntity.badRequest()
-                        .body("Authentication error: " + e.message + "\n")
-            }
-
-            SecurityContextHolder.getContext().authentication = authentication
-            val jwt: String = jwtUtils.generateJwtToken(authentication)
-            val userDetails = authentication.principal as MyUserDetails
-
-            return ResponseEntity.ok<Any>(JwtResponse(
-                    jwt,
-                    userDetails.id,
-                    userDetails.username,
-                    userDetails.email
-            ))
-        } else {
-            return ResponseEntity.badRequest()
-                    .body("Provide username and password")
-        }
+        return ResponseEntity.ok(authenticationService.authenticateUser(loginRequest))
     }
 
 }
