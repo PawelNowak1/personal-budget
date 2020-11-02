@@ -4,9 +4,10 @@ import {HomeComponent} from './pages/home/home.component';
 import {CategoriesComponent} from './pages/categories/categories.component';
 import {ReportsComponent} from './pages/reports/reports.component';
 import {OperationsComponent} from './pages/operations/operations.component';
-import {DxCalendarModule, DxDateBoxModule} from 'devextreme-angular';
+import {DevExtremeModule, DxCalendarModule, DxDateBoxModule, DxValidationGroupModule} from 'devextreme-angular';
 import {LoginFormComponent} from './shared/components';
 import {AuthGuardService} from './shared/services';
+import {CreateAccountFormComponent} from './shared/components/create-account-form/create-account-form.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,11 @@ const routes: Routes = [
     canActivate: [ AuthGuardService ]
   },
   {
+    path: 'createAccount',
+    component: CreateAccountFormComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
     path: '**',
     redirectTo: 'home',
     canActivate: [ AuthGuardService ]
@@ -42,9 +48,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), DxCalendarModule, DxDateBoxModule],
+  imports: [RouterModule.forRoot(routes, {enableTracing: true}), DxCalendarModule, DxDateBoxModule, DxValidationGroupModule, DevExtremeModule],
   providers: [AuthGuardService],
   exports: [RouterModule],
-  declarations: [HomeComponent, CategoriesComponent, ReportsComponent, OperationsComponent]
+  declarations: [HomeComponent, CategoriesComponent, ReportsComponent, OperationsComponent, CreateAccountFormComponent]
 })
 export class AppRoutingModule { }

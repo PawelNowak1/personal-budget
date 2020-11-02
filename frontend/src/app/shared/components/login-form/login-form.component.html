@@ -1,5 +1,5 @@
 <dx-scroll-view height="100%" class="full-height-scrollable">
-  <div class="dx-card content">
+  <div class="dx-card content" id="card">
     <dx-validation-group>
       <div class="login-header">
         <div class="title">{{appInfo.title}}</div>
@@ -19,9 +19,6 @@
           </dx-validator>
         </dx-text-box>
       </div>
-<!--      <div class="dx-field">-->
-<!--        <dx-check-box [value]="false" text="Remember me"></dx-check-box>-->
-<!--      </div>-->
       <div class="dx-field">
         <dx-button type="default" text="Login" (onClick)="onLoginClick($event)" width="100%"></dx-button>
       </div>
@@ -29,8 +26,15 @@
         <a routerLink="/recovery">{{formatMessage('Forgot password?', null)}}</a>
       </div>
       <div class="dx-field">
-        <dx-button type="normal" [text]="formatMessage('Create an account', null)" width="100%"></dx-button>
+        <dx-button type="normal" [text]="formatMessage('Create an account', null)" (onClick)="onCreateAccountClick()" width="100%"></dx-button>
       </div>
     </dx-validation-group>
   </div>
+
 </dx-scroll-view>
+<dx-load-panel
+  [shading]="false"
+  [closeOnOutsideClick]="false"
+  [(visible)]="isLoadPanelVisible"
+  [position]="{ of: '#card' }">
+</dx-load-panel>

@@ -1,0 +1,52 @@
+<dx-scroll-view height="100%" class="full-height-scrollable">
+  <div class="dx-card content" id="card-create">
+    <dx-validation-group>
+      <div class="login-header">
+        <div class="title">{{formatMessage('Create account', null)}}</div>
+        <div>{{formatMessage('Register to take over your finances!', null)}}</div>
+      </div>
+      <div class="dx-field">
+        <dx-text-box stylingMode="underlined" [(value)]="username" [placeholder]="formatMessage('Username', null)" width="100%">
+          <dx-validator>
+            <dxi-validation-rule type="required" [message]="formatMessage('Username is required', null)"></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
+      </div>
+      <div class="dx-field">
+        <dx-text-box stylingMode="underlined" [(value)]="email" [placeholder]="formatMessage('Email', null)" width="100%">
+          <dx-validator>
+            <dxi-validation-rule type="required" [message]="formatMessage('Email is required', null)"></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
+      </div>
+      <div class="dx-field">
+        <dx-text-box stylingMode="underlined" mode="password" [(value)]="password" [placeholder]="formatMessage('Password', null)" width="100%">
+          <dx-validator>
+            <dxi-validation-rule type="required" [message]="formatMessage('Password is required', null)"></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
+      </div>
+      <div class="dx-field">
+        <dx-text-box stylingMode="underlined" mode="password" [placeholder]="formatMessage('Confirm password', null)" width="100%">
+          <dx-validator>
+            <dxi-validation-rule type="required" [message]="formatMessage('Confirm password required', null)"></dxi-validation-rule>
+            <dxi-validation-rule type="compare" [comparisonTarget]="passwordComparison"
+                                 [message]="formatMessage('Password and Confirm Password do not match', null)"></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
+      </div>
+      <div class="dx-field">
+        <dx-button type="default" (onClick)="createAccount($event)" [text]="formatMessage('Register', null)" width="100%"></dx-button>
+      </div>
+      <div class="dx-field">
+        <a routerLink="/login">{{formatMessage('Already have account? Sign in!', null)}}</a>
+      </div>
+    </dx-validation-group>
+  </div>
+</dx-scroll-view>
+<dx-load-panel
+  [shading]="false"
+  [closeOnOutsideClick]="false"
+  [(visible)]="isLoadPanelVisible"
+  [position]="{ of: '#card-create' }">
+</dx-load-panel>

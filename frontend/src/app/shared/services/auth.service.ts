@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {HttpHelper} from './http-helper';
+import {map} from 'rxjs/operators';
 
 const defaultPath = '/home';
 
@@ -17,16 +18,28 @@ export class AuthService {
     this._lastAuthenticatedPath = value;
   }
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient) {
+    if (localStorage.getItem('id_token')) {
+      this._loggedIn = true;
+    }
+  }
 
   logIn(login: string, password: string) {
-    this.http.post(`${HttpHelper.baseURL}/login`, {username: login, password})
-      .subscribe((result: any) => {
+    return this.http.post(`${HttpHelper.baseURL}/login`, {username: login, password})
+      .pipe(map((result: any) => {
         localStorage.setItem('id_token', result.token);
         this._loggedIn = true;
-        this.router.navigate([this._lastAuthenticatedPath]);
-      });
-    this._loggedIn = false;
+        return result;
+      }));
+  }
+
+  createAccount(username: string, email: string, password: string) {
+    return this.http.post(`${HttpHelper.baseURL}/registration`, {username, password, email})
+      .pipe(map((result: any) => {
+        localStorage.setItem('id_token', result.token);
+        this._loggedIn = true;
+        return result;
+      }));
   }
 
   logOut() {
@@ -42,11 +55,16 @@ export class AuthGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot): boolean {
     const isLoggedIn = this.authService.loggedIn;
     const isLoginForm = route.routeConfig.path === 'login';
+    const isCreateAccForm = route.routeConfig.path === 'createAccount';
 
-    if(isLoggedIn && isLoginForm) {
+    if (isLoggedIn && (isLoginForm || isCreateAccForm)) {
       this.authService.lastAuthenticatedPath = defaultPath;
       this.router.navigate([defaultPath]);
       return false;
+    }
+
+    if (!isLoggedIn && isCreateAccForm) {
+      return true;
     }
 
     if (!isLoggedIn && !isLoginForm) {

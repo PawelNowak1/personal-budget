@@ -7,9 +7,11 @@ import { DxTextBoxModule } from 'devextreme-angular/ui/text-box';
 import { DxValidatorModule } from 'devextreme-angular/ui/validator';
 import { DxValidationGroupModule } from 'devextreme-angular/ui/validation-group';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import {DxScrollViewModule} from 'devextreme-angular';
+import {Router, RouterModule} from '@angular/router';
+import {DxLoadIndicatorModule, DxLoadPanelModule, DxScrollViewModule} from 'devextreme-angular';
 import {formatMessage} from 'devextreme/localization';
+import {first} from 'rxjs/operators';
+import notify from 'devextreme/ui/notify';
 
 @Component({
   selector: 'app-login-form',
@@ -19,18 +21,39 @@ import {formatMessage} from 'devextreme/localization';
 export class LoginFormComponent {
   login = '';
   password = '';
+  createAccountPath = '/createAccount';
+  isLoadPanelVisible = false;
   formatMessage = formatMessage;
 
-  constructor(private authService: AuthService, public appInfo: AppInfoService) { }
+  constructor(private authService: AuthService, public appInfo: AppInfoService, private router: Router) { }
 
   onLoginClick(args) {
     if (!args.validationGroup.validate().isValid) {
       return;
     }
+    this.isLoadPanelVisible = true;
+    this.authService.logIn(this.login, this.password)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.isLoadPanelVisible = false;
+          args.validationGroup.reset();
+          this.router.navigate(['/home']);
+        },
+        error => {
+          args.validationGroup.reset();
+          this.isLoadPanelVisible = false;
+          notify({
+            message: error.message,
+            type: 'error',
+            displayTime: 3000,
+            position: 'top'
+          });
+        });
+  }
 
-    this.authService.logIn(this.login, this.password);
-
-    args.validationGroup.reset();
+  onCreateAccountClick() {
+    this.router.navigate([this.createAccountPath]);
   }
 }
 @NgModule({
@@ -42,7 +65,9 @@ export class LoginFormComponent {
     DxTextBoxModule,
     DxValidatorModule,
     DxValidationGroupModule,
-    DxScrollViewModule
+    DxScrollViewModule,
+    DxLoadPanelModule,
+    DxLoadIndicatorModule
   ],
   declarations: [ LoginFormComponent ],
   exports: [ LoginFormComponent ]

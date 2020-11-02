@@ -22,10 +22,10 @@ class RegistrationController(val authenticationService: AuthenticationServiceImp
 
     @PostMapping
     fun register(@RequestBody registrationDTO: RegistrationDTO): ResponseEntity<*>? {
-        try {
-            return ResponseEntity.ok(authenticationService.registrateUser(registrationDTO))
+        return try {
+            ResponseEntity.ok(authenticationService.registrateUser(registrationDTO))
         } catch (e: UserAlreadyExistsException) {
-            return ResponseEntity.badRequest().body(e.message)
+            ResponseEntity.badRequest().body(e.message)
         }
     }
 }
