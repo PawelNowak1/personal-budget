@@ -1,8 +1,47 @@
-<div style="display: flex; justify-content: flex-end; margin-right: 40px; margin-top: 15px">
+<div style="display: flex; justify-content: flex-end; margin-right: 40px; margin-top: 15px; margin-bottom: 5px">
       <dx-date-box
+        [value]="monthYear"
         displayFormat="monthAndYear">
           <dxo-calendar-options maxZoomLevel="year" minZoomLevel="decade" zoomLevel="year"></dxo-calendar-options>
       </dx-date-box>
 </div>
-<p>home works!</p>
-<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+<dx-data-grid
+  width="100%"
+  showColumnLines="true"
+  showBorders="true"
+  [allowColumnResizing]="true"
+  [allowColumnReordering]="true"
+  [dataSource]="operations">
+  <dxi-column dataField="category" [caption]="formatMessage('Category', null)" [groupIndex]="0"></dxi-column>
+  <dxi-column dataField="subcategory" [caption]="formatMessage('Subcategory', null)"></dxi-column>
+  <dxi-column dataField="plan" format="currency" [caption]="formatMessage('Plan', null)"></dxi-column>
+  <dxi-column dataField="real" format="currency" [caption]="formatMessage('Real', null)"></dxi-column>
+  <dxi-column dataField="difference" format="currency" [caption]="formatMessage('Difference', null)"></dxi-column>
+
+  <dxo-group-panel [visible]="true"></dxo-group-panel>
+  <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+
+  <dxo-summary>
+    <dxi-group-item
+      column="plan"
+      summaryType="sum"
+      valueFormat="currency"
+      [showInGroupFooter]="false"
+      [alignByColumn]="true">
+    </dxi-group-item>
+    <dxi-group-item
+      column="real"
+      summaryType="sum"
+      valueFormat="currency"
+      [showInGroupFooter]="false"
+      [alignByColumn]="true">
+    </dxi-group-item>
+    <dxi-group-item
+      column="difference"
+      summaryType="sum"
+      valueFormat="currency"
+      [alignByColumn]="true"
+      [showInGroupFooter]="false">
+    </dxi-group-item>
+  </dxo-summary>
+</dx-data-grid>

@@ -1,6 +1,6 @@
-{
-  "Yes": "Oui",
-  "No": "Non",
+{"pl":{
+  "Yes": "Tak",
+  "No": "Nie",
   "Cancel": "Annuler",
   "Clear": "Vider",
   "Done": "Terminé",
@@ -17,6 +17,12 @@
   "Already have account? Sign in!": "Masz już konto? Zaloguj się!",
   "Password and Confirm Password do not match": "Hasła się nie zgadzają",
   "Account created!": "Konto utworzone!",
+  "Category": "Kategoria",
+  "Subcategory": "Podkategoria",
+  "Plan": "Plan",
+  "Real": "Rzeczywiste",
+  "Difference": "Różnica",
+
   "Register": "Zarejestruj się",
   "Categories": "Kategorie",
   "Reports": "Raporty",
@@ -148,8 +154,8 @@
   "dxDataGrid-summaryMaxOtherColumn": "Maximum de {1} est {0}",
   "dxDataGrid-summaryAvg": "Moy: {0}",
   "dxDataGrid-summaryAvgOtherColumn": "Moyenne de {1} est {0}",
-  "dxDataGrid-summarySum": "Somme: {0}",
-  "dxDataGrid-summarySumOtherColumn": "Somme de {1} est {0}",
+  "dxDataGrid-summarySum": "Suma: {0}",
+  "dxDataGrid-summarySumOtherColumn": "Suma de {1} est {0}",
   "dxDataGrid-summaryCount": "Total: {0}",
   "dxDataGrid-columnFixingFix": "Fixer",
   "dxDataGrid-columnFixingUnfix": "Détacher",
@@ -576,4 +582,4 @@
   "dxGantt-zoomIn": "TODO",
   "dxGantt-zoomOut": "TODO",
   "dxGantt-fullScreen": "TODO"
-}
+}}

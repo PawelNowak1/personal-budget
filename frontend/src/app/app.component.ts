@@ -3,6 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import {loadMessages, locale} from 'devextreme/localization';
 import config from 'devextreme/core/config';
 import {AuthService} from './shared/services';
+// @ts-ignore
+import plMessages from './../assets/locale/pl.json';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +15,7 @@ export class AppComponent {
   title = 'frontend';
 
   constructor(private authService: AuthService, private http: HttpClient) {
-    this.http.get('assets/locale/pl.json').subscribe(result => this.initMessages(result));
-  }
-
-  private initMessages(result): void {
-    result = JSON.parse('{"pl":' + JSON.stringify(result) + '}');
-    loadMessages(result);
+    loadMessages(plMessages);
     locale('pl');
     config({ defaultCurrency: 'PLN' });
   }

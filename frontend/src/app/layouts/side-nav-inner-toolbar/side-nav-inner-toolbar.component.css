@@ -32,6 +32,6 @@
   width: 200px !important;
 }
 
-::ng-deep .dx-toolbar-items-container {
+::ng-deep .toolbar-logo > .dx-toolbar-items-container {
   background-color: #f2f2f2;
 }

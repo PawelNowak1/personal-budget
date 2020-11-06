@@ -48,7 +48,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {enableTracing: true}), DxCalendarModule, DxDateBoxModule, DxValidationGroupModule, DevExtremeModule],
+  // for routing debug use: RouterModule.forRoot(routes, {enableTracing: true}),
+  imports: [RouterModule.forRoot(routes),
+    DxCalendarModule, DxDateBoxModule, DxValidationGroupModule, DevExtremeModule],
   providers: [AuthGuardService],
   exports: [RouterModule],
   declarations: [HomeComponent, CategoriesComponent, ReportsComponent, OperationsComponent, CreateAccountFormComponent]
