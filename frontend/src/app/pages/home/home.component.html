@@ -1,6 +1,7 @@
 <div style="display: flex; justify-content: flex-end; margin-right: 40px; margin-top: 15px; margin-bottom: 5px">
       <dx-date-box
         [value]="monthYear"
+        (onValueChanged)="onValueChanged($event)"
         displayFormat="monthAndYear">
           <dxo-calendar-options maxZoomLevel="year" minZoomLevel="decade" zoomLevel="year"></dxo-calendar-options>
       </dx-date-box>
@@ -45,3 +46,4 @@
     </dxi-group-item>
   </dxo-summary>
 </dx-data-grid>
+<app-add-account></app-add-account>

@@ -8,6 +8,7 @@ import {DevExtremeModule, DxCalendarModule, DxDateBoxModule, DxValidationGroupMo
 import {LoginFormComponent} from './shared/components';
 import {AuthGuardService} from './shared/services';
 import {CreateAccountFormComponent} from './shared/components/create-account-form/create-account-form.component';
+import {SharedModule} from './shared/shared.module';
 
 const routes: Routes = [
   {
@@ -50,7 +51,7 @@ const routes: Routes = [
 @NgModule({
   // for routing debug use: RouterModule.forRoot(routes, {enableTracing: true}),
   imports: [RouterModule.forRoot(routes),
-    DxCalendarModule, DxDateBoxModule, DxValidationGroupModule, DevExtremeModule],
+    DxCalendarModule, DxDateBoxModule, DxValidationGroupModule, DevExtremeModule, SharedModule],
   providers: [AuthGuardService],
   exports: [RouterModule],
   declarations: [HomeComponent, CategoriesComponent, ReportsComponent, OperationsComponent, CreateAccountFormComponent]
