@@ -13,7 +13,5 @@ class BudgetPlan (
     val amount: BigDecimal,
     val monthYear: Date,
     @ManyToOne
-    val category: Category,
-    @ManyToOne
-    val user: User
+    val category: Category
 )

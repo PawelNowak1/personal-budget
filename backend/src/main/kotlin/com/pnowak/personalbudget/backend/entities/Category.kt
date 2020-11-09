@@ -12,5 +12,7 @@ class Category (
     val parent: Category?,
     val title: String,
     @ManyToOne
-    val user: User
+    val user: User,
+    val type: String,
+    val orderNum: Int?
 )

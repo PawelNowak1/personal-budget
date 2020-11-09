@@ -13,5 +13,6 @@ class Account (
         val user: User,
         val name: String,
         val currency: String,
-        val type: Int
+        val type: Int,
+        val active: Boolean?
 )

@@ -9,7 +9,7 @@ import {DxValidationGroupComponent} from 'devextreme-angular';
 })
 export class AddAccountComponent {
   @Input() visible = false;
-  @ViewChild(AddAccountComponent, {static: false}) addAccountComponent: AddAccountComponent;
+  @ViewChild(DxValidationGroupComponent, {static: false}) validationGroup: DxValidationGroupComponent;
   accountData: any = {};
 
   accountTypes = [
@@ -37,7 +37,9 @@ export class AddAccountComponent {
   constructor() { }
 
   submit = () => {
-    console.log(this.addAccountComponent);
-    console.log(this.accountData);
+    if (!this.validationGroup.instance.validate().isValid) {
+      return;
+    }
+
   }
 }
