@@ -1,8 +1,15 @@
 import {Component, NgModule, OnInit} from '@angular/core';
-import {DxDrawerModule, DxScrollViewModule, DxToolbarModule, DxTreeViewModule} from 'devextreme-angular';
+import {
+  DxButtonModule,
+  DxDrawerModule,
+  DxScrollViewModule,
+  DxToolbarModule,
+  DxTreeViewModule
+} from 'devextreme-angular';
 import {navigation} from '../../app-navigation';
 import {Router} from '@angular/router';
 import {formatMessage} from 'devextreme/localization';
+import {AuthService} from "../../shared/services";
 
 @Component({
   selector: 'app-side-nav-inner-toolbar',
@@ -14,7 +21,7 @@ export class SideNavInnerToolbarComponent implements OnInit {
   items: { text: string; path: string; icon: string; }[];
   formatMessage = formatMessage;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService) {
     this.items = navigation;
   }
 
@@ -26,6 +33,10 @@ export class SideNavInnerToolbarComponent implements OnInit {
     this.router.navigate([path]);
   }
 
+  logOut() {
+    this.authService.logOut();
+  }
+
 }
 
 @NgModule({
@@ -33,7 +44,8 @@ export class SideNavInnerToolbarComponent implements OnInit {
     DxDrawerModule,
     DxToolbarModule,
     DxTreeViewModule,
-    DxScrollViewModule
+    DxScrollViewModule,
+    DxButtonModule
   ],
   exports: [ SideNavInnerToolbarComponent ],
   declarations: [ SideNavInnerToolbarComponent ]

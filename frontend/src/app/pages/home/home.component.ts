@@ -15,7 +15,9 @@ export class HomeComponent {
   operations: any;
 
   constructor(private homeService: HomeService) {
-    this.operations = this.homeService.operations;
+    this.homeService.getMonthlyView(this.monthYear.getMonth(), this.monthYear.getFullYear()).subscribe((operation) => {
+      this.operations = operation;
+    });
   }
 
   onValueChanged(event) {

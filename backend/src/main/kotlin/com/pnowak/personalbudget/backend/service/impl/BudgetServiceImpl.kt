@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class BudgetServiceImpl(private val jdbcTemplate: NamedParameterJdbcTemplate) : BudgetService {
-    override fun getMonthYearBudget(month: Int, year: Int, userId: Long): MutableList<Budget?> {
+    override fun getMonthYearBudget(month: Int, year: Int, userId: Long?): MutableList<Budget?> {
         val sql = "SELECT\n" +
                 "c.id as category_id,\n" +
                 "       c.title as sub_category,\n" +
