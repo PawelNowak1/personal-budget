@@ -1,14 +1,14 @@
 import {Component, ViewChild} from '@angular/core';
 import {HomeService} from './home.service';
 import {formatMessage} from 'devextreme/localization';
-import {AddAccountComponent} from '../../shared/popups/add-account/add-account.component';
+import {AddOperationComponent} from '../../shared/popups/add-operation/add-operation.component';
 
 @Component({
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  @ViewChild(AddAccountComponent, {static: false}) addAccountComponent: AddAccountComponent;
+  @ViewChild(AddOperationComponent, {static: false}) addOperationComponent: AddOperationComponent;
 
   monthYear: Date = new Date();
   formatMessage = formatMessage;
@@ -20,7 +20,17 @@ export class HomeComponent {
     });
   }
 
+  refreshGridData() {
+    this.homeService.getMonthlyView(this.monthYear.getMonth(), this.monthYear.getFullYear()).subscribe((operation) => {
+      this.operations = operation;
+    });
+  }
+
   onValueChanged(event) {
-    this.addAccountComponent.visible = true;
+    this.refreshGridData();
+  }
+
+  addOperation() {
+    this.addOperationComponent.visible = true;
   }
 }

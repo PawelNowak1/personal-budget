@@ -1,5 +1,6 @@
 package com.pnowak.personalbudget.backend.entities
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import java.math.BigDecimal
 import javax.persistence.*
 
@@ -7,12 +8,13 @@ import javax.persistence.*
 class Account (
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Long,
-        val amount: BigDecimal,
+        val id: Long = -1,
+        var amount: BigDecimal = BigDecimal.ZERO,
+        @JsonIgnore
         @ManyToOne
-        val user: User,
-        val name: String,
-        val currency: String,
-        val type: Int,
-        val active: Boolean?
+        var user: User? = null,
+        var name: String = "",
+        var currency: String = "",
+        var type: Int = 0,
+        var active: Boolean = true
 )

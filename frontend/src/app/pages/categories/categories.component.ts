@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {CategoriesService} from './categories.service';
 
 @Component({
   templateUrl: './categories.component.html',
@@ -6,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class CategoriesComponent {
 
-  constructor() { }
+  constructor(private categoriesService: CategoriesService) {
+    this.categoriesService.getCategoryList().subscribe((result) => console.log(result));
+  }
 
 }

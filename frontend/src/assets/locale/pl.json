@@ -37,12 +37,13 @@
   "Forgot password?": "Zapomniałeś hasła?",
   "Create an account": "Utwórz konto",
   "Add account": "Dodaj konto",
+  "Add operation": "Dodaj operację",
   "Choose type": "Wybierz typ",
   "Currency": "Waluta",
   "Active": "Aktywne",
   "Type name of account": "Podaj nazwę konta",
   "Account name": "Nazwa konta",
-  "dxCollectionWidget-noDataText": "Pas de données",
+  "dxCollectionWidget-noDataText": "Brak danych",
 
   "dxDropDownEditor-selectLabel": "Wybierz",
 
@@ -110,7 +111,7 @@
   "dxForm-requiredMessage": "{0} est obligatoire",
 
   "dxNumberBox-invalidValueMessage": "La valeur doit être un nombre",
-  "dxNumberBox-noDataText": "Pas de données",
+  "dxNumberBox-noDataText": "Brak danych",
 
   "dxDataGrid-columnChooserTitle": "Choisir les colonnes",
   "dxDataGrid-columnChooserEmptyText": "Faites glisser une colonne ici pour la cacher",
@@ -127,7 +128,7 @@
   "dxDataGrid-editingConfirmDeleteMessage": "Êtes-vous sûr de vouloir supprimer cet élément ?",
   "dxDataGrid-validationCancelChanges": "Annuler les changements",
   "dxDataGrid-groupPanelEmptyText": "Faites glisser une colonne ICI pour grouper par celle-ci",
-  "dxDataGrid-noDataText": "Pas de données",
+  "dxDataGrid-noDataText": "Brak danych",
   "dxDataGrid-searchPanelPlaceholder": "Recherche...",
   "dxDataGrid-filterRowShowAllText": "(tous)",
   "dxDataGrid-filterRowResetOperationText": "Réinitialiser",

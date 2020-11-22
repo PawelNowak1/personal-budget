@@ -11,7 +11,7 @@
       <div class="dx-field">
         <div class="dx-field-label big-font">{{formatMessage('Type name of account', null)}}</div>
         <div class="dx-field-value">
-          <dx-text-box [placeholder]="formatMessage('Account name', null)">
+          <dx-text-box [placeholder]="formatMessage('Account name', null)" [(value)]="accountData.name">
             <dx-validator>
               <dxi-validation-rule type="required"></dxi-validation-rule>
             </dx-validator>
@@ -23,6 +23,7 @@
           <div class="dx-field-label big-font">{{formatMessage('Choose type', null)}}</div>
           <div class="dx-field-value">
             <dx-select-box [dataSource]="accountTypes"
+                           [(value)]="accountData.type"
                            displayExpr="typeName"
                            valueExpr="id">
               <dx-validator>
@@ -33,7 +34,7 @@
       </div>
       <div class="dx-field">
         <div class="dx-field-label big-font">{{formatMessage('Balance', null)}}</div>
-        <dx-number-box format="#0.## " class="dx-field-value">
+        <dx-number-box format="#0.## " class="dx-field-value" [(value)]="accountData.amount">
           <dx-validator>
             <dxi-validation-rule type="required"></dxi-validation-rule>
           </dx-validator>
@@ -42,7 +43,7 @@
       <div class="dx-field">
         <div class="dx-field-label big-font">{{formatMessage('Currency', null)}}</div>
         <div class="dx-field-value">
-          <dx-select-box [dataSource]="currency">
+          <dx-select-box [dataSource]="currency" [(value)]="accountData.currency">
             <dx-validator>
               <dxi-validation-rule type="required"></dxi-validation-rule>
             </dx-validator>
@@ -51,7 +52,7 @@
       </div>
       <div class="dx-field">
         <div class="dx-field-label big-font">{{formatMessage('Active', null)}}</div>
-          <dx-switch [value]="active"></dx-switch>
+          <dx-switch [(value)]="accountData.active"></dx-switch>
       </div>
     </dx-validation-group>
   </div>

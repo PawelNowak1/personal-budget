@@ -1,0 +1,87 @@
+<dx-popup
+  [width]="600"
+  [height]="540"
+  [showTitle]="true"
+  [title]="formatMessage('Add operation', null)"
+  [dragEnabled]="true"
+  [closeOnOutsideClick]="false"
+  [(visible)]="visible">
+  <div *dxTemplate="let data of 'content'">
+    <dx-form id="form"
+             [colCount]="2"
+             [formData]="operationData">
+      <dxi-item cssClass="big-font" dataField="operationDate" editorType="dxDateBox">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+        <dxo-label
+          text="Data operacji"
+          location="left">
+        </dxo-label>
+      </dxi-item>
+      <dxi-item dataField="amount" [editorOptions]="{format: '#0.## '}" editorType="dxNumberBox">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+        <dxo-label
+          text="Kwota"
+          location="left">
+        </dxo-label>
+      </dxi-item>
+      <dxi-item dataField="categoryId" colSpan="2"
+                [editorOptions]="{dataSource: fromUngroupedData, valueExpr: 'categoryId', displayExpr: 'subcategory', grouped: true}" editorType="dxSelectBox">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+        <dxo-label
+          text="Wybierz kategorię"
+          location="left">
+        </dxo-label>
+      </dxi-item>
+      <dxi-item colSpan="2">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+        <div *dxTemplate>
+          <div style="display: flex">
+            <div style="flex-grow: 50">
+              <dx-select-box
+                [items]="accountList"
+                [(value)]="operationData.accountId"
+                valueExpr="id"
+                displayExpr="name">
+              </dx-select-box>
+            </div>
+            <div style="flex-grow: 1">
+              <dx-button icon="plus" (onClick)="addAccountComponent.visible = true"></dx-button>
+            </div>
+          </div>
+        </div>
+        <dxo-label
+          text="Wybierz konto"
+          location="left">
+        </dxo-label>
+      </dxi-item>
+      <dxi-item [colSpan]="2">
+        <div *dxTemplate>
+          <dx-text-area [(value)]="operationData.description"></dx-text-area>
+        </div>
+        <dxo-label
+          text="Opis"
+          location="left">
+        </dxo-label>
+      </dxi-item>
+    </dx-form>
+  </div>
+  <dxi-toolbar-item
+    widget="dxButton"
+    location="after"
+    toolbar="bottom"
+    [options]="{
+            onClick: nextOperationTrue,
+            text: 'Dodaj i utwórz kolejną'
+        }">
+  </dxi-toolbar-item>
+  <dxi-toolbar-item
+    widget="dxButton"
+    location="after"
+    toolbar="bottom"
+    [options]="{
+            onClick: nextOperationFalse,
+            text: 'Dodaj'
+        }">
+  </dxi-toolbar-item>
+</dx-popup>
+<app-add-account></app-add-account>

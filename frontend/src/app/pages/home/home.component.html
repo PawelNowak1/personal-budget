@@ -1,6 +1,6 @@
 <div style="display: flex; justify-content: flex-end; margin-right: 40px; margin-top: 15px; margin-bottom: 5px">
       <dx-date-box
-        [value]="monthYear"
+        [(value)]="monthYear"
         (onValueChanged)="onValueChanged($event)"
         displayFormat="monthAndYear">
           <dxo-calendar-options maxZoomLevel="year" minZoomLevel="decade" zoomLevel="year"></dxo-calendar-options>
@@ -49,6 +49,7 @@
 
 <dx-speed-dial-action
   hint="Edit"
+  (onClick)="addOperation()"
   icon="add">
 </dx-speed-dial-action>
-<app-add-account></app-add-account>
+<app-add-operation (refreshGrid)="refreshGridData()"></app-add-operation>

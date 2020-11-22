@@ -5,18 +5,18 @@ import java.util.*
 import javax.persistence.*
 
 @Entity
-class Operation (
+class Operation(
 
-    @Id
+        @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+        val id: Long = -1,
 
-    val name: String,
-    val createDate: Date,
-    val operationDate: Date,
-    val description: String,
-    @ManyToOne val category: Category,
-    val amount: BigDecimal,
-    @ManyToOne
-    val account: Account
+        val name: String = "", // do usunięcia
+        var createDate: Date = Date(),
+        var operationDate: Date = Date(),
+        var description: String? = null,
+        @ManyToOne var category: Category? = null,
+        var amount: BigDecimal = BigDecimal.ZERO,
+        @ManyToOne
+        var account: Account = Account()
 )

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {formatMessage} from 'devextreme/localization';
 import {DxValidationGroupComponent} from 'devextreme-angular';
+import {AccountService} from '../../services/account.service';
 
 @Component({
   selector: 'app-add-account',
@@ -10,7 +11,7 @@ import {DxValidationGroupComponent} from 'devextreme-angular';
 export class AddAccountComponent {
   @Input() visible = false;
   @ViewChild(DxValidationGroupComponent, {static: false}) validationGroup: DxValidationGroupComponent;
-  accountData: any = {};
+  accountData: any = {active: true};
 
   accountTypes = [
     {
@@ -34,12 +35,14 @@ export class AddAccountComponent {
   currency = ['PLN', 'EUR', 'USD'];
   active = true;
   formatMessage = formatMessage;
-  constructor() { }
+  constructor(private accountService: AccountService) { }
 
   submit = () => {
     if (!this.validationGroup.instance.validate().isValid) {
       return;
     }
-
+    this.accountService.createAccount(this.accountData).subscribe((result) => {
+        this.visible = false;
+    });
   }
 }
