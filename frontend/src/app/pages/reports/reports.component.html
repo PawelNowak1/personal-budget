@@ -1,1 +1,18 @@
-<p>reports works!</p>
+<div style="margin-top: 40px">
+<dx-chart id="sales-chart">
+  <dxo-common-series-settings type="bar"></dxo-common-series-settings>
+  <dxo-size [height]="320"></dxo-size>
+  <dxo-adaptive-layout [width]="450"></dxo-adaptive-layout>
+  <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+</dx-chart>
+<dx-pivot-grid id="reportPivotGrid"
+               [allowSortingBySummary]="true"
+               [allowSorting]="true"
+               [allowFiltering]="true"
+               [allowExpandAll]="true"
+               [height]="440"
+               [showBorders]="true"
+               [dataSource]="dataSource">
+  <dxo-field-chooser [enabled]="false"></dxo-field-chooser>
+</dx-pivot-grid>
+</div>

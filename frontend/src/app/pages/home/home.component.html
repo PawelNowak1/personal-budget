@@ -12,12 +12,16 @@
   showBorders="true"
   [allowColumnResizing]="true"
   [allowColumnReordering]="true"
+  [showColumnLines]="true"
+  [showRowLines]="true"
+  [showBorders]="true"
+  [rowAlternationEnabled]="true"
   [dataSource]="operations">
   <dxi-column dataField="category" [caption]="formatMessage('Category', null)" [groupIndex]="0"></dxi-column>
   <dxi-column dataField="subcategory" [caption]="formatMessage('Subcategory', null)"></dxi-column>
-  <dxi-column dataField="plan" format="currency" [caption]="formatMessage('Plan', null)"></dxi-column>
-  <dxi-column dataField="real" format="currency" [caption]="formatMessage('Real', null)"></dxi-column>
-  <dxi-column dataField="difference" format="currency" [caption]="formatMessage('Difference', null)"></dxi-column>
+  <dxi-column dataField="plan" [format]="{type: 'currency', precision: 2}" [caption]="formatMessage('Plan', null)"></dxi-column>
+  <dxi-column dataField="real" [format]="{type: 'currency', precision: 2}"  [caption]="formatMessage('Real', null)"></dxi-column>
+  <dxi-column dataField="difference" [format]="{type: 'currency', precision: 2}"  [caption]="formatMessage('Difference', null)"></dxi-column>
 
   <dxo-group-panel [visible]="true"></dxo-group-panel>
   <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
@@ -26,21 +30,21 @@
     <dxi-group-item
       column="plan"
       summaryType="sum"
-      valueFormat="currency"
+      [valueFormat]="{type: 'currency', precision: 2}"
       [showInGroupFooter]="false"
       [alignByColumn]="true">
     </dxi-group-item>
     <dxi-group-item
       column="real"
       summaryType="sum"
-      valueFormat="currency"
+      [valueFormat]="{type: 'currency', precision: 2}"
       [showInGroupFooter]="false"
       [alignByColumn]="true">
     </dxi-group-item>
     <dxi-group-item
       column="difference"
       summaryType="sum"
-      valueFormat="currency"
+      [valueFormat]="{type: 'currency', precision: 2}"
       [alignByColumn]="true"
       [showInGroupFooter]="false">
     </dxi-group-item>

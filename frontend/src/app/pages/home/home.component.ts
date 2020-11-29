@@ -15,9 +15,7 @@ export class HomeComponent {
   operations: any;
 
   constructor(private homeService: HomeService) {
-    this.homeService.getMonthlyView(this.monthYear.getMonth(), this.monthYear.getFullYear()).subscribe((operation) => {
-      this.operations = operation;
-    });
+    this.refreshGridData();
   }
 
   refreshGridData() {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {HttpHelper} from './http-helper';
 
 @Injectable({
@@ -11,5 +11,14 @@ export class OperationService {
 
   createOperation(operationData: any) {
     return this.http.post(`${HttpHelper.baseURL}/operation/create`, operationData);
+  }
+
+  getOperations(month?: number, year?: number) {
+    if (month && year) {
+      const params = new HttpParams().set('month', (month + 1).toString()).set('year', year.toString());
+      return this.http.get(`${HttpHelper.baseURL}/operation/get`, {params});
+    } else {
+      return this.http.get(`${HttpHelper.baseURL}/operation/get`);
+    }
   }
 }

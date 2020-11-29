@@ -1,5 +1,6 @@
 package com.pnowak.personalbudget.backend.entities
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
@@ -11,5 +12,6 @@ data class User (
         val username: String?,
         var active: Boolean,
         val email: String?,
+        @JsonIgnore
         val password: String
 )
