@@ -28,7 +28,23 @@ export class HomeComponent {
     this.refreshGridData();
   }
 
+  calcGroupValue(rowData) {
+    return rowData.parentOrdNumber + ';' + rowData.category;
+  }
+
   addOperation() {
     this.addOperationComponent.visible = true;
   }
+
+  getTitle(cellInfo) {
+    if (cellInfo.cellElement) {
+      if (cellInfo?.data?.items[0]?.categoryType === 'expense') {
+        cellInfo.cellElement.style.color = 'red';
+      } else {
+        cellInfo.cellElement.style.color = 'lightgreen';
+      }
+    }
+    return cellInfo.data.key.split(';')[1];
+  }
+
 }

@@ -1,1 +1,60 @@
-<p>categories works!</p>
+<div style="display: flex; justify-content: flex-end; margin-right: 40px; margin-top: 15px; margin-bottom: 5px">
+</div>
+<dx-data-grid
+  width="100%"
+  showColumnLines="true"
+  showBorders="true"
+  [showColumnLines]="true"
+  [showRowLines]="true"
+  [showBorders]="true"
+  [rowAlternationEnabled]="true"
+  [allowColumnResizing]="true"
+  [allowColumnReordering]="true"
+  [dataSource]="categories">
+  <dxo-editing
+    mode="popup"
+    [allowUpdating]="true"
+    [allowDeleting]="true"
+    [allowAdding]="true">
+  </dxo-editing>
+  <dxo-row-dragging
+    [onReorder]="onReorder"
+    [allowReordering]="true"
+    [showDragIcons]="true"
+  ></dxo-row-dragging>
+  <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+  <dxo-state-storing [enabled]="true" type="localStorage" storageKey="storageCat"></dxo-state-storing>
+  <dxo-filter-row
+    [visible]="true">
+  </dxo-filter-row>
+  <dxo-header-filter
+    [visible]="true">
+  </dxo-header-filter>
+  <dxo-paging [pageSize]="50"></dxo-paging>
+  <dxo-pager
+    [showPageSizeSelector]="true"
+    [allowedPageSizes]="[10, 25, 50, 100, 250]">
+  </dxo-pager>
+  <dxo-search-panel
+    [visible]="true"
+    [highlightCaseSensitive]="true">
+  </dxo-search-panel>
+  <dxo-group-panel
+    [visible]="true">
+  </dxo-group-panel>
+
+  <dxi-column dataField="category" [caption]="formatMessage('Category', null)">
+<!--    <div *dxTemplate="let data of 'templateGroup'">-->
+<!--      {{data.column.caption}}: {{data.text}}-->
+<!--      <span style="margin-left: 10px">-->
+<!--        <dx-button icon="add" hint="Dodaj podkategorie" (onClick)="addSubcategory()">-->
+<!--        </dx-button>-->
+<!--      </span>-->
+<!--    </div>-->
+  </dxi-column>
+
+  <dxi-column dataField="subcategory" [caption]="formatMessage('Subcategory', null)"></dxi-column>
+</dx-data-grid>
+
+<app-add-category-button (refreshGrid)="refreshGrid()"></app-add-category-button>
+

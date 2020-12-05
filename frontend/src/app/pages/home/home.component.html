@@ -8,6 +8,7 @@
 </div>
 <dx-data-grid
   width="100%"
+  height="93vh"
   showColumnLines="true"
   showBorders="true"
   [allowColumnResizing]="true"
@@ -17,7 +18,11 @@
   [showBorders]="true"
   [rowAlternationEnabled]="true"
   [dataSource]="operations">
-  <dxi-column dataField="category" [caption]="formatMessage('Category', null)" [groupIndex]="0"></dxi-column>
+  <dxi-column dataField="category" groupCellTemplate="grpCellTemplate" [calculateGroupValue]="calcGroupValue" [caption]="formatMessage('Category', null)" [groupIndex]="0"></dxi-column>
+  <div *dxTemplate="let cellInfo of 'grpCellTemplate'">
+    {{ getTitle(cellInfo) }}
+  </div>
+
   <dxi-column dataField="subcategory" [caption]="formatMessage('Subcategory', null)"></dxi-column>
   <dxi-column dataField="plan" [format]="{type: 'currency', precision: 2}" [caption]="formatMessage('Plan', null)"></dxi-column>
   <dxi-column dataField="real" [format]="{type: 'currency', precision: 2}"  [caption]="formatMessage('Real', null)"></dxi-column>
@@ -52,7 +57,7 @@
 </dx-data-grid>
 
 <dx-speed-dial-action
-  hint="Edit"
+  hint="Dodaj operację"
   (onClick)="addOperation()"
   icon="add">
 </dx-speed-dial-action>

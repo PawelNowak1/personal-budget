@@ -36,7 +36,7 @@ export class ReportsComponent implements AfterViewInit {
           dataType: 'date',
           area: 'column'
         }, {
-          caption: 'Sales',
+          caption: 'Operacje',
           dataField: 'amount',
           dataType: 'number',
           summaryType: 'sum',

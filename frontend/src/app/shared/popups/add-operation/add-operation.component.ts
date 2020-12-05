@@ -23,7 +23,7 @@ export class AddOperationComponent implements OnInit {
   formatMessage = formatMessage;
   operationData: any = {operationDate: new Date(), amount: null, accountId: null};
   fromUngroupedData: DataSource;
-  accountList: any;
+  accountList: any = {};
 
   constructor(private categoriesService: CategoriesService,
               private accountService: AccountService,

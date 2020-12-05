@@ -1,0 +1,81 @@
+<dx-speed-dial-action
+  [label]="formatMessage('Add main category', null)"
+  (onClick)="showCreateCatPopup()"
+  [index]="2"
+  icon="add">
+</dx-speed-dial-action>
+<dx-speed-dial-action
+  icon="add"
+  (onClick)="showCreateSubcatPopup()"
+  [label]="formatMessage('Add subcategory', null)"
+  [index]="1">
+</dx-speed-dial-action>
+
+<dx-popup
+  [width]="600"
+  [height]="350"
+  [showTitle]="true"
+  [title]="formatMessage(title, null)"
+  [dragEnabled]="true"
+  [closeOnOutsideClick]="false"
+  [(visible)]="visible">
+  <div *dxTemplate="let data of 'content'">
+    <dx-validation-group #validationGroup>
+      <div class="dx-field">
+        <div class="dx-field-label big-font">{{formatMessage('Category', null)}}</div>
+        <div *ngIf="categoryMode === 0; else elseBlock" class="dx-field-value">
+          <dx-text-box [placeholder]="formatMessage('Category', null)" [(value)]="categoryData.parentCategoryName">
+            <dx-validator>
+              <dxi-validation-rule type="required"></dxi-validation-rule>
+            </dx-validator>
+          </dx-text-box>
+        </div>
+        <ng-template #elseBlock>
+          <div class="dx-field-value">
+            <dx-select-box displayExpr="title"
+                           valueExpr="id"
+                           [dataSource]="parentCategories"
+                           [(value)]="categoryData.parentCategoryId">
+              <dx-validator>
+                <dxi-validation-rule type="required"></dxi-validation-rule>
+              </dx-validator>
+            </dx-select-box>
+          </div>
+        </ng-template>
+      </div>
+      <div class="dx-field">
+        <div class="dx-field-label big-font">{{formatMessage('Subcategory', null)}}</div>
+        <div class="dx-field-value">
+          <dx-text-box [placeholder]="formatMessage('Subcategory', null)" [(value)]="categoryData.subcategoryName">
+            <dx-validator>
+              <dxi-validation-rule type="required"></dxi-validation-rule>
+            </dx-validator>
+          </dx-text-box>
+        </div>
+      </div>
+      <div *ngIf="categoryMode === 0" class="dx-field">
+        <div class="dx-field-label big-font">{{formatMessage('Type', null)}}</div>
+        <div class="dx-field-value">
+          <dx-select-box displayExpr="display"
+                         valueExpr="key"
+                         [dataSource]="types"
+                         [(value)]="categoryData.categoryType">
+            <dx-validator>
+              <dxi-validation-rule type="required"></dxi-validation-rule>
+            </dx-validator>
+          </dx-select-box>
+        </div>
+      </div>
+    </dx-validation-group>
+  </div>
+
+  <dxi-toolbar-item
+    widget="dxButton"
+    location="after"
+    toolbar="bottom"
+    [options]="{
+            text: 'Ok',
+            onClick: submit
+        }">
+  </dxi-toolbar-item>
+</dx-popup>

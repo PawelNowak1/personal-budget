@@ -7,16 +7,18 @@ import {HttpHelper} from '../../shared/services/http-helper';
   providedIn: 'root'
 })
 export class CategoriesService {
-  public responseCache = new Map();
+
   constructor(private http: HttpClient) { }
 
   getCategoryList() {
-    const categoryListFromCache = this.responseCache.get(`${HttpHelper.baseURL}/categories/list`);
-    if (categoryListFromCache) {
-      return of(categoryListFromCache);
-    }
-    const response = this.http.get(`${HttpHelper.baseURL}/categories/list`);
-    response.subscribe(result => this.responseCache.set(`${HttpHelper.baseURL}/categories/list`, result));
-    return response;
+    return this.http.get(`${HttpHelper.baseURL}/categories/list`);
+  }
+
+  getOnlyParentCategories() {
+    return this.http.get(`${HttpHelper.baseURL}/categories/onlyParent`);
+  }
+
+  createCategory(categoryData) {
+    return this.http.post(`${HttpHelper.baseURL}/categories/create`, categoryData);
   }
 }

@@ -8,14 +8,14 @@ import javax.persistence.*
 class Category (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Long? = null,
     @ManyToOne
     @JoinColumn(name = "ID_PARENT")
     val parent: Category?,
-    val title: String,
+    var title: String,
     @JsonIgnore
     @ManyToOne
     val user: User,
-    val type: String,
-    val orderNum: Int?
+    var type: CategoryType?,
+    var orderNum: Int?
 )

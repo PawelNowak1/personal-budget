@@ -1,6 +1,7 @@
 package com.pnowak.personalbudget.backend.mapper
 
 import com.pnowak.personalbudget.backend.dto.Budget
+import com.pnowak.personalbudget.backend.enums.CategoryType
 import org.springframework.jdbc.core.RowMapper
 import java.sql.ResultSet
 import java.sql.SQLException
@@ -17,6 +18,8 @@ class BudgetMapper : RowMapper<Budget?> {
         budget.difference = rs.getBigDecimal("difference")
         budget.ordNumber = rs.getInt("order_num")
         budget.categoryId = rs.getLong("category_id")
+        budget.parentOrdNumber = rs.getInt("parent_ord_number")
+        budget.categoryType = CategoryType.fromInt(rs.getInt("category_type"))
         return budget
     }
 }

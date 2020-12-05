@@ -17,6 +17,12 @@
   [allowColumnResizing]="true"
   [allowColumnReordering]="true"
   [dataSource]="operations">
+  <dxo-editing
+    mode="popup"
+    [allowUpdating]="true"
+    [allowDeleting]="true"
+    [allowAdding]="true">
+  </dxo-editing>
   <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
   <dxo-state-storing [enabled]="true" type="localStorage" storageKey="storage"></dxo-state-storing>
   <dxo-filter-row
@@ -44,7 +50,6 @@
   <dxi-column dataField="description" [caption]="formatMessage('Description', null)"></dxi-column>
   <dxi-column dataField="amount" [format]="{type: 'currency', precision: 2}"  [caption]="formatMessage('Amount', null)"></dxi-column>
 
-<!--  <dxo-group-panel [visible]="true"></dxo-group-panel>-->
 <!--  <dxo-grouping [autoExpandAll]="true"></dxo-grouping>-->
 
 <!--  <dxo-summary>-->
