@@ -8,7 +8,7 @@ import javax.persistence.*
 class BudgetPlan (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Long?,
 
     val amount: BigDecimal,
     val monthYear: Date,

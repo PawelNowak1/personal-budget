@@ -21,4 +21,12 @@ export class OperationService {
       return this.http.get(`${HttpHelper.baseURL}/operation/get`);
     }
   }
+
+  deleteOperation(operationId: number) {
+    return this.http.delete(`${HttpHelper.baseURL}/operation/delete/${operationId}`);
+  }
+
+  createBudgetPlan(budget: any) {
+    return this.http.post(`${HttpHelper.baseURL}/budget/create`, budget);
+  }
 }

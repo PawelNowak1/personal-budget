@@ -10,6 +10,7 @@
   width="100%"
   showColumnLines="true"
   showBorders="true"
+  (onRowRemoving)="removeOpertion($event)"
   [showColumnLines]="true"
   [showRowLines]="true"
   [showBorders]="true"
@@ -48,6 +49,7 @@
   <dxi-column dataField="category.title" [caption]="formatMessage('Category', null)"></dxi-column>
   <dxi-column dataField="category.parent.title" [caption]="formatMessage('Subcategory', null)"></dxi-column>
   <dxi-column dataField="description" [caption]="formatMessage('Description', null)"></dxi-column>
+  <dxi-column dataField="account.name" [caption]="formatMessage('Account name', null)"></dxi-column>
   <dxi-column dataField="amount" [format]="{type: 'currency', precision: 2}"  [caption]="formatMessage('Amount', null)"></dxi-column>
 
 <!--  <dxo-grouping [autoExpandAll]="true"></dxo-grouping>-->
@@ -77,9 +79,9 @@
 <!--  </dxo-summary>-->
 </dx-data-grid>
 
-<!--<dx-speed-dial-action-->
-<!--  hint="Edit"-->
-<!--  (onClick)="addOperation()"-->
-<!--  icon="add">-->
-<!--</dx-speed-dial-action>-->
+<dx-speed-dial-action
+  hint="Dodaj operację"
+  (onClick)="addOperation()"
+  icon="add">
+</dx-speed-dial-action>
 <app-add-operation (refreshGrid)="refreshGridData()"></app-add-operation>

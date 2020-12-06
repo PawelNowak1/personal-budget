@@ -6,13 +6,22 @@
   <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
 </dx-chart>
 <dx-pivot-grid id="reportPivotGrid"
+               [allowFiltering]="true"
                [allowSortingBySummary]="true"
                [allowSorting]="true"
-               [allowFiltering]="true"
                [allowExpandAll]="true"
                [height]="440"
                [showBorders]="true"
                [dataSource]="dataSource">
   <dxo-field-chooser [enabled]="false"></dxo-field-chooser>
+  <dxo-field-panel
+    [showDataFields]="false"
+    [showRowFields]="true"
+    [showColumnFields]="false"
+    [showFilterFields]="false"
+    [allowFieldDragging]="true"
+    [visible]="true">
+  </dxo-field-panel>
+
 </dx-pivot-grid>
 </div>

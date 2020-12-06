@@ -28,7 +28,6 @@ export class AddCategoryButtonComponent implements OnInit {
   constructor(private categoriesService: CategoriesService) { }
 
   ngOnInit(): void {
-    console.log('abc');
     this.categoriesService.getOnlyParentCategories().subscribe((result) => this.parentCategories = result);
   }
 

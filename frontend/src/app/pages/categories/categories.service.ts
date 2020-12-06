@@ -21,4 +21,8 @@ export class CategoriesService {
   createCategory(categoryData) {
     return this.http.post(`${HttpHelper.baseURL}/categories/create`, categoryData);
   }
+
+  deleteCategory(id: any) {
+    return this.http.delete(`${HttpHelper.baseURL}/categories/delete/${id}`);
+  }
 }

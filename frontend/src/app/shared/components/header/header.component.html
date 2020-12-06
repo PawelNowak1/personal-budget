@@ -1,0 +1,31 @@
+<header>
+  <dx-toolbar class="header-toolbar">
+    <dxi-item
+      *ngIf="menuToggleEnabled"
+      location="before"
+      widget="dxButton"
+      cssClass="menu-button"
+      [options]="{
+        icon: 'menu',
+        stylingMode: 'text',
+        onClick: toggleMenu
+      }">
+    </dxi-item>
+    <dxi-item
+      location="before"
+      cssClass="header-title"
+      text="Budżet domowy">
+    </dxi-item>
+    <dxi-item
+      location="after"
+      widget="dxButton"
+      cssClass="menu-button"
+      [options]="{
+        icon: 'export',
+        text: 'Wyloguj się',
+        stylingMode: 'text',
+        onClick: logOut
+      }">
+    </dxi-item>
+  </dx-toolbar>
+</header>

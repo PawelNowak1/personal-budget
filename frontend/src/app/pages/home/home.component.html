@@ -1,16 +1,11 @@
-<div style="display: flex; justify-content: flex-end; margin-right: 40px; margin-top: 15px; margin-bottom: 5px">
-      <dx-date-box
-        [(value)]="monthYear"
-        (onValueChanged)="onValueChanged($event)"
-        displayFormat="monthAndYear">
-          <dxo-calendar-options maxZoomLevel="year" minZoomLevel="decade" zoomLevel="year"></dxo-calendar-options>
-      </dx-date-box>
-</div>
+
 <dx-data-grid
   width="100%"
-  height="93vh"
+  height="91vh"
   showColumnLines="true"
   showBorders="true"
+  (onToolbarPreparing)="onToolbarPreparing($event)"
+  (onRowUpdating)="onRowUpdating($event)"
   [allowColumnResizing]="true"
   [allowColumnReordering]="true"
   [showColumnLines]="true"
@@ -18,15 +13,30 @@
   [showBorders]="true"
   [rowAlternationEnabled]="true"
   [dataSource]="operations">
-  <dxi-column dataField="category" groupCellTemplate="grpCellTemplate" [calculateGroupValue]="calcGroupValue" [caption]="formatMessage('Category', null)" [groupIndex]="0"></dxi-column>
+
+  <div *dxTemplate="let data of 'dateBox'">
+    <dx-date-box
+      id="myDateBox"
+      [(value)]="monthYear"
+      (onValueChanged)="onValueChanged($event)"
+      displayFormat="monthAndYear">
+      <dxo-calendar-options maxZoomLevel="year" minZoomLevel="decade" zoomLevel="year"></dxo-calendar-options>
+    </dx-date-box>
+  </div>
+
+  <dxo-editing mode="cell"
+               [allowUpdating]="true">
+  </dxo-editing>
+
+  <dxi-column dataField="category" groupCellTemplate="grpCellTemplate" [allowEditing]="false" [calculateGroupValue]="calcGroupValue" [caption]="formatMessage('Category', null)" [groupIndex]="0"></dxi-column>
   <div *dxTemplate="let cellInfo of 'grpCellTemplate'">
     {{ getTitle(cellInfo) }}
   </div>
 
-  <dxi-column dataField="subcategory" [caption]="formatMessage('Subcategory', null)"></dxi-column>
+  <dxi-column dataField="subcategory" [allowEditing]="false" [caption]="formatMessage('Subcategory', null)"></dxi-column>
   <dxi-column dataField="plan" [format]="{type: 'currency', precision: 2}" [caption]="formatMessage('Plan', null)"></dxi-column>
-  <dxi-column dataField="real" [format]="{type: 'currency', precision: 2}"  [caption]="formatMessage('Real', null)"></dxi-column>
-  <dxi-column dataField="difference" [format]="{type: 'currency', precision: 2}"  [caption]="formatMessage('Difference', null)"></dxi-column>
+  <dxi-column dataField="real" [allowEditing]="false" [format]="{type: 'currency', precision: 2}"  [caption]="formatMessage('Real', null)"></dxi-column>
+  <dxi-column dataField="difference" [allowEditing]="false" [format]="{type: 'currency', precision: 2}"  [caption]="formatMessage('Difference', null)"></dxi-column>
 
   <dxo-group-panel [visible]="true"></dxo-group-panel>
   <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
@@ -35,6 +45,7 @@
     <dxi-group-item
       column="plan"
       summaryType="sum"
+      displayFormat="{0}"
       [valueFormat]="{type: 'currency', precision: 2}"
       [showInGroupFooter]="false"
       [alignByColumn]="true">
@@ -42,6 +53,7 @@
     <dxi-group-item
       column="real"
       summaryType="sum"
+      displayFormat="{0}"
       [valueFormat]="{type: 'currency', precision: 2}"
       [showInGroupFooter]="false"
       [alignByColumn]="true">
@@ -49,6 +61,7 @@
     <dxi-group-item
       column="difference"
       summaryType="sum"
+      displayFormat="{0}"
       [valueFormat]="{type: 'currency', precision: 2}"
       [alignByColumn]="true"
       [showInGroupFooter]="false">

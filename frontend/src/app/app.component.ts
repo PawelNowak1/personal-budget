@@ -17,7 +17,10 @@ export class AppComponent {
   constructor(private authService: AuthService, private http: HttpClient) {
     loadMessages(plMessages);
     locale('pl');
-    config({ defaultCurrency: 'PLN' });
+    config({ defaultCurrency: 'PLN', floatingActionButtonConfig: {
+          position: { at: 'right bottom', my: 'right bottom', offset: '-80 -16' }
+      }
+    });
   }
 
   isAutorized() {

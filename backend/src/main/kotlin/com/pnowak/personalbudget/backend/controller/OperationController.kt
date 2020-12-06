@@ -29,4 +29,9 @@ class OperationController(val operationService: OperationService) {
                       @RequestParam(required = false) year: Int?) : ResponseEntity<List<Operation>> {
         return ResponseEntity.ok(operationService.getOperations(month, year, getUserIdFromContext()!!))
     }
+
+    @DeleteMapping("/delete/{operationId}")
+    fun deleteCategory(@PathVariable operationId: Long): ResponseEntity<Unit> {
+        return ResponseEntity.ok(operationService.deleteCategory(operationId))
+    }
 }

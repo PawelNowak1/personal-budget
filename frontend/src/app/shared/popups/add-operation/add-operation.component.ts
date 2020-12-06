@@ -32,7 +32,7 @@ export class AddOperationComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoriesService.getCategoryList().subscribe(
-      result => this.fromUngroupedData = new DataSource({
+      (result: any) => this.fromUngroupedData = new DataSource({
         store: new ArrayStore({
           data: result,
           key: 'id'

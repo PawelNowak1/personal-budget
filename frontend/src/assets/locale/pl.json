@@ -123,7 +123,7 @@
   "dxNumberBox-noDataText": "Brak danych",
 
   "dxDataGrid-columnChooserTitle": "Wybierz kolumny",
-  "dxDataGrid-columnChooserEmptyText": "Faites glisser une colonne ici pour la cacher",
+  "dxDataGrid-columnChooserEmptyText": "Przeciągnij kolumnę tutaj, aby ją ukryć",
   "dxDataGrid-groupContinuesMessage": "Suite à la page suivante",
   "dxDataGrid-groupContinuedMessage": "Suite de la page précédente",
   "dxDataGrid-groupHeaderText": "Grouper avec cette colonne",
@@ -239,8 +239,8 @@
   "dxScheduler-recurrenceHourly": "Hourly",
   "dxScheduler-recurrenceDaily": "Quotidien",
   "dxScheduler-recurrenceWeekly": "Hebdomadaire",
-  "dxScheduler-recurrenceMonthly": "Mensuel",
-  "dxScheduler-recurrenceYearly": "Annuel",
+  "dxScheduler-recurrenceMonthly": "Miesięcznie",
+  "dxScheduler-recurrenceYearly": "Rocznie",
 
   "dxScheduler-recurrenceRepeatEvery": "Chaque",
   "dxScheduler-recurrenceRepeatOn": "Repeat On",

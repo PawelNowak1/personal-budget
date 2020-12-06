@@ -12,5 +12,6 @@ data class Budget(
         var difference: BigDecimal? = null,
         var ordNumber: Int? = null,
         var parentOrdNumber: Int? = null,
-        var categoryType: CategoryType? = null
+        var categoryType: CategoryType? = null,
+        var budgetPlanId: Long? = null
 )

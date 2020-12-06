@@ -1,31 +1,17 @@
+<app-header
+  class="layout-header"
+  [menuToggleEnabled]="true"
+  (menuToggle)="menuOpened = !menuOpened;">
+</app-header>
+
 <dx-drawer
-  opened="true"
+  [(opened)]="menuOpened"
+  [closeOnOutsideClick]="false"
+  template="panel"
+  openedStateMode="shrink"
   position="before">
   <div class="navigation-bar"
        *dxTemplate="let dataMenu of 'panel'">
-    <dx-toolbar class="toolbar-logo" id="navigation-header">
-      <dxi-item
-        location="before"
-        cssClass="menu-button"
-        widget="dxButton"
-        [options]="{
-                    icon: 'menu',
-              stylingMode: 'text'
-            }">
-      </dxi-item>
-      <dxi-item
-        location="center"
-        [text]="'Budżet domowy'">
-      </dxi-item>
-
-    </dx-toolbar>
-    <div style="text-align: center" class="toolbar-logo">
-        <dx-button
-          icon="clear"
-          (onClick)="logOut()"
-          text="Wyloguj się">
-        </dx-button>
-    </div>
     <div class="menu-container">
       <dx-tree-view
         [items]="items"

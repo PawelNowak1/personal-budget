@@ -36,7 +36,7 @@ class CategoryServiceImpl (private val categoryRepository: CategoryRepository,
     }
 
     override fun getOnlyParentCategoryList(userIdFromContext: Long?): List<Category> {
-        return categoryRepository.findAllByParentIsNullAndUserId(userIdFromContext!!)
+        return categoryRepository.findAllByParentIsNullAndUserIdOrderByOrderNum(userIdFromContext!!)
     }
 
     override fun deleteCategory(categoryId: Long) {

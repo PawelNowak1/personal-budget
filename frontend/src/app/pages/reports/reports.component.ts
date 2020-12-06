@@ -22,16 +22,17 @@ export class ReportsComponent implements AfterViewInit {
     this.operationService.getOperations().subscribe((operation) => {
       this.dataSource = {
         fields: [{
-          caption: 'Category',
+          caption: 'Kategoria',
           width: 120,
           dataField: 'category.parent.title',
           area: 'row'
         }, {
-          caption: 'SubCategory',
+          caption: 'Podkategoria',
           width: 120,
           dataField: 'category.title',
           area: 'row'
         }, {
+          caption: 'Data',
           dataField: 'operationDate',
           dataType: 'date',
           area: 'column'

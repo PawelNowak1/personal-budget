@@ -15,12 +15,6 @@ export class AccountService {
   }
 
   getAccountList() {
-    const accountListFromCache = this.responseCache.get(`${HttpHelper.baseURL}/account/list`);
-    if (accountListFromCache) {
-      return of(accountListFromCache);
-    }
-    const response = this.http.get(`${HttpHelper.baseURL}/account/list`);
-    response.subscribe(result => this.responseCache.set(`${HttpHelper.baseURL}/account/list`, result));
-    return response;
+    return this.http.get(`${HttpHelper.baseURL}/account/list`);
   }
 }

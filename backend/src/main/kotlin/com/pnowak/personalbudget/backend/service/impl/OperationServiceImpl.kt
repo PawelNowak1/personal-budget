@@ -46,4 +46,8 @@ class OperationServiceImpl (private val accountRepository: AccountRepository,
     override fun getOperations(userIdFromContext: Long): List<Operation> {
         return operationRepository.findAllByAccountUserId(userIdFromContext)
     }
+
+    override fun deleteCategory(operationId: Long) {
+        return operationRepository.deleteById(operationId)
+    }
 }
