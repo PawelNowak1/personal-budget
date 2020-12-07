@@ -2,6 +2,7 @@
 </div>
 <dx-data-grid
   width="100%"
+  height="91vh"
   showColumnLines="true"
   showBorders="true"
   (onRowRemoving)="removeCategory($event)"
@@ -15,8 +16,7 @@
   <dxo-editing
     mode="popup"
     [allowUpdating]="true"
-    [allowDeleting]="true"
-    [allowAdding]="true">
+    [allowDeleting]="true">
   </dxo-editing>
   <dxo-row-dragging
     [onReorder]="onReorder"
@@ -45,16 +45,19 @@
   </dxo-group-panel>
 
   <dxi-column dataField="category" [caption]="formatMessage('Category', null)">
-<!--    <div *dxTemplate="let data of 'templateGroup'">-->
-<!--      {{data.column.caption}}: {{data.text}}-->
-<!--      <span style="margin-left: 10px">-->
-<!--        <dx-button icon="add" hint="Dodaj podkategorie" (onClick)="addSubcategory()">-->
-<!--        </dx-button>-->
-<!--      </span>-->
-<!--    </div>-->
+    <dxi-validation-rule type="required"></dxi-validation-rule>
   </dxi-column>
-
-  <dxi-column dataField="subcategory" [caption]="formatMessage('Subcategory', null)"></dxi-column>
+  <dxi-column dataField="subcategory" [caption]="formatMessage('Subcategory', null)">
+    <dxi-validation-rule type="required"></dxi-validation-rule>
+  </dxi-column>
+  <dxi-column dataField="type" [caption]="formatMessage('Category type', null)">
+    <dxi-validation-rule type="required"></dxi-validation-rule>
+    <dxo-lookup
+      [dataSource]="categoryTypes"
+      valueExpr="id"
+      displayExpr="typeName">
+    </dxo-lookup>
+  </dxi-column>
 </dx-data-grid>
 
 <app-add-category-button (refreshGrid)="refreshGrid()"></app-add-category-button>

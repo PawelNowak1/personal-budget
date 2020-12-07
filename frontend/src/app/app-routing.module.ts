@@ -9,6 +9,7 @@ import {LoginFormComponent} from './shared/components';
 import {AuthGuardService} from './shared/services';
 import {CreateAccountFormComponent} from './shared/components/create-account-form/create-account-form.component';
 import {SharedModule} from './shared/shared.module';
+import {AccountsComponent} from './pages/accounts/accounts.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,11 @@ const routes: Routes = [
   {
     path: 'operations',
     component: OperationsComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'accounts',
+    component: AccountsComponent,
     canActivate: [ AuthGuardService ]
   },
   {
@@ -54,6 +60,6 @@ const routes: Routes = [
     DxCalendarModule, DxDateBoxModule, DxValidationGroupModule, DevExtremeModule, SharedModule],
   providers: [AuthGuardService],
   exports: [RouterModule],
-  declarations: [HomeComponent, CategoriesComponent, ReportsComponent, OperationsComponent, CreateAccountFormComponent]
+  declarations: [HomeComponent, CategoriesComponent, ReportsComponent, OperationsComponent, AccountsComponent, CreateAccountFormComponent]
 })
 export class AppRoutingModule { }

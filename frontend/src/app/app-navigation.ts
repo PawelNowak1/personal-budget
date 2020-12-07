@@ -18,5 +18,10 @@ export const navigation = [
     text: 'Kategorie',
     icon: 'orderedlist',
     path: '/categories'
+  },
+  {
+    text: 'Konta',
+    icon: 'card',
+    path: '/accounts'
   }
 ];

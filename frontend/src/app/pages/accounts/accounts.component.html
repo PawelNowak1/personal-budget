@@ -1,0 +1,64 @@
+<dx-data-grid
+  width="100%"
+  showColumnLines="true"
+  showBorders="true"
+  (onRowUpdated)="updateAccount($event)"
+  [showColumnLines]="true"
+  [showRowLines]="true"
+  [showBorders]="true"
+  [rowAlternationEnabled]="true"
+  [allowColumnResizing]="true"
+  [allowColumnReordering]="true"
+  [dataSource]="accounts">
+  <dxo-filter-row
+    [visible]="true">
+  </dxo-filter-row>
+  <dxo-header-filter
+    [visible]="true">
+  </dxo-header-filter>
+  <dxo-editing
+    mode="row"
+    [allowUpdating]="true"
+    [allowAdding]="false">
+  </dxo-editing>
+  <dxo-state-storing [enabled]="true" type="localStorage" storageKey="storageAccount"></dxo-state-storing>
+
+  <dxo-paging [pageSize]="50"></dxo-paging>
+  <dxo-pager
+    [showPageSizeSelector]="true"
+    [allowedPageSizes]="[10, 25, 50, 100, 250]">
+  </dxo-pager>
+
+  <dxi-column dataField="name" [caption]="formatMessage('Account name', null)">
+    <dxi-validation-rule type="required"></dxi-validation-rule>
+  </dxi-column>
+  <dxi-column dataField="type" [caption]="formatMessage('Account type', null)">
+    <dxi-validation-rule type="required"></dxi-validation-rule>
+    <dxo-lookup
+      [dataSource]="accountTypes"
+      valueExpr="id"
+      displayExpr="typeName">
+    </dxo-lookup>
+  </dxi-column>
+  <dxi-column dataField="amount" [format]="{type: 'currency', precision: 2}"  [caption]="formatMessage('Amount', null)">
+    <dxi-validation-rule type="required"></dxi-validation-rule>
+  </dxi-column>
+  <dxi-column dataField="active" [caption]="formatMessage('Account active', null)"></dxi-column>
+
+  <dxo-summary>
+    <dxi-total-item
+      column="amount"
+      summaryType="sum"
+      displayFormat="Łączny stan kont: {0}"
+      [valueFormat]="{type: 'currency', precision: 2}"
+      valueFormat="currency">
+    </dxi-total-item>
+  </dxo-summary>
+</dx-data-grid>
+
+<dx-speed-dial-action
+  hint="Dodaj operację"
+  (onClick)="addAccount()"
+  icon="add">
+</dx-speed-dial-action>
+<app-add-account (refreshGrid)="refreshGridData()"></app-add-account>

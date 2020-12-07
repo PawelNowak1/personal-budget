@@ -26,6 +26,22 @@ export class OperationsComponent {
     });
   }
 
+  onToolbarPreparing(event) {
+    const itemDateBox = {
+      location: 'after',
+      template: 'dateBox'
+    };
+
+    event.toolbarOptions.items.push(itemDateBox);
+  }
+
+  onCellPrepared(e) {
+    if (e.rowType === 'data' && e.column?.dataField === 'amount') {
+      e.cellElement.style.color = e.data?.category?.parent?.type === 'income' ? 'lightgreen' : 'red';
+      e.cellElement.style.fontWeight = 'bold';
+    }
+  }
+
   removeOpertion(event) {
     this.operationService.deleteOperation(event.data.id).subscribe(() => {
       notify({

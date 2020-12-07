@@ -6,6 +6,7 @@ import com.pnowak.personalbudget.backend.repository.AccountRepository
 import com.pnowak.personalbudget.backend.repository.UserRepository
 import com.pnowak.personalbudget.backend.service.interfaces.AccountService
 import org.springframework.stereotype.Service
+import java.math.BigDecimal
 
 @Service
 class AccountServiceImpl (private val accountRepository: AccountRepository,
@@ -19,10 +20,17 @@ class AccountServiceImpl (private val accountRepository: AccountRepository,
         account.currency = createAccountDTO.currency
         account.type = createAccountDTO.type
         account.name = createAccountDTO.name
-        return accountRepository.save(account).id
+        account.id = createAccountDTO.id
+        return accountRepository.save(account).id!!
     }
 
-    override fun getAccountList(userIdFromContext: Long?): List<Account> {
+    override fun getAccountList(onlyActive: Boolean?, userIdFromContext: Long?): List<Account> {
+        if (onlyActive!!)
+            return accountRepository.findAllByUserIdAndActiveIsTrue(userIdFromContext)
         return accountRepository.findAllByUserId(userIdFromContext)
+    }
+
+    override fun getSumAmountByUserId(userId: Long?): BigDecimal {
+        return accountRepository.sumAmountByUserId(userId)
     }
 }

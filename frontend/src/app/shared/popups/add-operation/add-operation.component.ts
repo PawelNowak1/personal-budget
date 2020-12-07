@@ -40,7 +40,11 @@ export class AddOperationComponent implements OnInit {
         group: 'category'
       }));
 
-    this.accountService.getAccountList().subscribe(result => this.accountList = result);
+    this.accountService.getAccountList(true).subscribe(result => this.accountList = result);
+  }
+
+  displayExpr(item) {
+    return item && '' + item.name + ' (Saldo: ' + item.amount + ' zł)';
   }
 
   addOperation(addNextOperation: boolean) {

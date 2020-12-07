@@ -3,6 +3,7 @@ package com.pnowak.personalbudget.backend.service.impl
 import com.pnowak.personalbudget.backend.dto.CreateOperationDTO
 import com.pnowak.personalbudget.backend.entities.Account
 import com.pnowak.personalbudget.backend.entities.Operation
+import com.pnowak.personalbudget.backend.enums.CategoryType
 import com.pnowak.personalbudget.backend.repository.AccountRepository
 import com.pnowak.personalbudget.backend.repository.CategoryRepository
 import com.pnowak.personalbudget.backend.repository.OperationRepository
@@ -27,6 +28,10 @@ class OperationServiceImpl (private val accountRepository: AccountRepository,
         operation.description = createOperationDTO.description
         operation.category = category.get()
         operation.createDate = Date()
+        if (category.get().parent?.type == CategoryType.INCOME)
+            account.get().amount += operation.amount
+        else
+            account.get().amount -= operation.amount
         return operationRepository.save(operation).id
     }
 
@@ -47,7 +52,13 @@ class OperationServiceImpl (private val accountRepository: AccountRepository,
         return operationRepository.findAllByAccountUserId(userIdFromContext)
     }
 
-    override fun deleteCategory(operationId: Long) {
+    override fun deleteOperation(operationId: Long) {
+        val operation = operationRepository.findById(operationId)
+        if (operation.get().category?.parent?.type == CategoryType.INCOME) {
+            operation.get().account.amount -= operation.get().amount
+        } else {
+            operation.get().account.amount += operation.get().amount
+        }
         return operationRepository.deleteById(operationId)
     }
 }

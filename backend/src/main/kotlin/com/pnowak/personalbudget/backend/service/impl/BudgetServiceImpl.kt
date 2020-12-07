@@ -41,7 +41,7 @@ class BudgetServiceImpl(private val jdbcTemplate: NamedParameterJdbcTemplate,
     override fun getCategoryList(userId: Long?): MutableList<CategoryDTO> {
         val sql = "SELECT\n" +
                 "       c.id,\n" +
-                "       c.type,\n" +
+                "       (select c2.type from category c2 where c2.id = c.id_parent) as type,\n" +
                 "       c.title as sub_category,\n" +
                 "       (select c2.title from category c2 where c2.id = c.id_parent) as category,\n" +
                 "       (select c2.order_num from category c2 where c2.id = c.id_parent) as parentOrdNum\n" +

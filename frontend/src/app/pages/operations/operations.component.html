@@ -1,16 +1,11 @@
-<div style="display: flex; justify-content: flex-end; margin-right: 40px; margin-top: 15px; margin-bottom: 5px">
-  <dx-date-box
-    [(value)]="monthYear"
-    (onValueChanged)="onValueChanged($event)"
-    displayFormat="monthAndYear">
-    <dxo-calendar-options maxZoomLevel="year" minZoomLevel="decade" zoomLevel="year"></dxo-calendar-options>
-  </dx-date-box>
-</div>
 <dx-data-grid
   width="100%"
   showColumnLines="true"
   showBorders="true"
+  height="91vh"
   (onRowRemoving)="removeOpertion($event)"
+  (onToolbarPreparing)="onToolbarPreparing($event)"
+  (onCellPrepared)="onCellPrepared($event)"
   [showColumnLines]="true"
   [showRowLines]="true"
   [showBorders]="true"
@@ -18,11 +13,21 @@
   [allowColumnResizing]="true"
   [allowColumnReordering]="true"
   [dataSource]="operations">
+
+  <div *dxTemplate="let data of 'dateBox'">
+    <dx-date-box
+      id="dateBoxOperation"
+      [(value)]="monthYear"
+      (onValueChanged)="onValueChanged($event)"
+      displayFormat="monthAndYear">
+      <dxo-calendar-options maxZoomLevel="year" minZoomLevel="decade" zoomLevel="year"></dxo-calendar-options>
+    </dx-date-box>
+  </div>
+
   <dxo-editing
     mode="popup"
     [allowUpdating]="true"
-    [allowDeleting]="true"
-    [allowAdding]="true">
+    [allowDeleting]="true">
   </dxo-editing>
   <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
   <dxo-state-storing [enabled]="true" type="localStorage" storageKey="storage"></dxo-state-storing>
@@ -32,11 +37,6 @@
   <dxo-header-filter
     [visible]="true">
   </dxo-header-filter>
-  <dxo-paging [pageSize]="50"></dxo-paging>
-  <dxo-pager
-    [showPageSizeSelector]="true"
-    [allowedPageSizes]="[10, 25, 50, 100, 250]">
-  </dxo-pager>
   <dxo-search-panel
     [visible]="true"
     [highlightCaseSensitive]="true">

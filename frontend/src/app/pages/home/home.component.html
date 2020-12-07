@@ -1,4 +1,3 @@
-
 <dx-data-grid
   width="100%"
   height="91vh"
@@ -6,6 +5,7 @@
   showBorders="true"
   (onToolbarPreparing)="onToolbarPreparing($event)"
   (onRowUpdating)="onRowUpdating($event)"
+  (onCellPrepared)="onCellPrepared($event)"
   [allowColumnResizing]="true"
   [allowColumnReordering]="true"
   [showColumnLines]="true"
@@ -37,11 +37,10 @@
   <dxi-column dataField="plan" [format]="{type: 'currency', precision: 2}" [caption]="formatMessage('Plan', null)"></dxi-column>
   <dxi-column dataField="real" [allowEditing]="false" [format]="{type: 'currency', precision: 2}"  [caption]="formatMessage('Real', null)"></dxi-column>
   <dxi-column dataField="difference" [allowEditing]="false" [format]="{type: 'currency', precision: 2}"  [caption]="formatMessage('Difference', null)"></dxi-column>
-
   <dxo-group-panel [visible]="true"></dxo-group-panel>
   <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
 
-  <dxo-summary>
+  <dxo-summary [calculateCustomSummary]="calculateGridSummaries">
     <dxi-group-item
       column="plan"
       summaryType="sum"
@@ -66,12 +65,68 @@
       [alignByColumn]="true"
       [showInGroupFooter]="false">
     </dxi-group-item>
+    <dxi-total-item
+      name="summaryRealIncome"
+      summaryType="custom"
+      valueFormat="currency"
+      [valueFormat]="{type: 'currency', precision: 2}"
+      displayFormat="Przychody rzeczywiste: {0}"
+      showInColumn="real">
+    </dxi-total-item>
+    <dxi-total-item
+      name="summaryRealExpense"
+      summaryType="custom"
+      valueFormat="currency"
+      [valueFormat]="{type: 'currency', precision: 2}"
+      displayFormat="Wydatki rzeczywiste: {0}"
+      showInColumn="real">
+    </dxi-total-item>
+    <dxi-total-item
+      name="summaryPlanIncome"
+      summaryType="custom"
+      valueFormat="currency"
+      [valueFormat]="{type: 'currency', precision: 2}"
+      displayFormat="Przychody planowane: {0}"
+      showInColumn="plan">
+    </dxi-total-item>
+
+    <dxi-total-item
+      name="summaryPlanExpense"
+      summaryType="custom"
+      valueFormat="currency"
+      [valueFormat]="{type: 'currency', precision: 2}"
+      displayFormat="Wydatki planowane: {0}"
+      showInColumn="plan">
+    </dxi-total-item>
+    <dxi-total-item
+      name="summaryAccountSum"
+      summaryType="custom"
+      valueFormat="currency"
+      [valueFormat]="{type: 'currency', precision: 2}"
+      displayFormat="Łączny stan kont: {0}"
+      showInColumn="subcategory">
+    </dxi-total-item>
+    <dxi-total-item
+      name="summaryDiffIncome"
+      summaryType="custom"
+      valueFormat="currency"
+      [valueFormat]="{type: 'currency', precision: 2}"
+      displayFormat="Różnica przychody: {0}"
+      showInColumn="difference">
+    </dxi-total-item>
+    <dxi-total-item
+      name="summaryDiffExpense"
+      summaryType="custom"
+      valueFormat="currency"
+      [valueFormat]="{type: 'currency', precision: 2}"
+      displayFormat="Różnica wydatki: {0}"
+      showInColumn="difference">
+    </dxi-total-item>
+
+
+
   </dxo-summary>
 </dx-data-grid>
 
-<dx-speed-dial-action
-  hint="Dodaj operację"
-  (onClick)="addOperation()"
-  icon="add">
-</dx-speed-dial-action>
+
 <app-add-operation (refreshGrid)="refreshGridData()"></app-add-operation>

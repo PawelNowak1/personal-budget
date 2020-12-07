@@ -10,6 +10,16 @@ import notify from 'devextreme/ui/notify';
 export class CategoriesComponent {
   formatMessage = formatMessage;
   categories: any;
+  categoryTypes = [
+    {
+      id: 'income',
+      typeName: 'Przychód'
+    },
+    {
+      id: 'expense',
+      typeName: 'Wydatek'
+    }
+  ];
 
   constructor(private categoriesService: CategoriesService) {
     this.categoriesService.getCategoryList().subscribe((result) => this.categories = result);

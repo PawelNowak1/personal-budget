@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.*
+import java.math.BigDecimal
 
 
 @CrossOrigin(origins = ["*"], maxAge = 3600)
@@ -29,7 +30,12 @@ class AccountController(val accountService: AccountService) {
     }
 
     @GetMapping("/list")
-    fun getCategories(): ResponseEntity<List<Account>> {
-        return ResponseEntity.ok(accountService.getAccountList(getUserIdFromContext()))
+    fun getCategories(@RequestParam(required = false) onlyActive: Boolean): ResponseEntity<List<Account>> {
+        return ResponseEntity.ok(accountService.getAccountList(onlyActive, getUserIdFromContext()))
+    }
+
+    @GetMapping("/sum")
+    fun getSumAmountByUserId(): ResponseEntity<BigDecimal> {
+        return ResponseEntity.ok(accountService.getSumAmountByUserId(getUserIdFromContext()))
     }
 }

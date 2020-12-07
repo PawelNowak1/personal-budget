@@ -8,4 +8,5 @@ class CreateAccountDTO {
     lateinit var currency: String
     var type: Int = 0
     var active: Boolean = false
+    var id: Long? = null
 }

@@ -8,7 +8,7 @@ import javax.persistence.*
 class Account (
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Long = -1,
+        var id: Long? = -1,
         var amount: BigDecimal = BigDecimal.ZERO,
         @JsonIgnore
         @ManyToOne

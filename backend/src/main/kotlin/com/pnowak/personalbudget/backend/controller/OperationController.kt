@@ -31,7 +31,7 @@ class OperationController(val operationService: OperationService) {
     }
 
     @DeleteMapping("/delete/{operationId}")
-    fun deleteCategory(@PathVariable operationId: Long): ResponseEntity<Unit> {
-        return ResponseEntity.ok(operationService.deleteCategory(operationId))
+    fun deleteOperation(@PathVariable operationId: Long): ResponseEntity<Unit> {
+        return ResponseEntity.ok(operationService.deleteOperation(operationId))
     }
 }
