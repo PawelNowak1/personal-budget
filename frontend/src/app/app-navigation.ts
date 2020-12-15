@@ -10,11 +10,6 @@ export const navigation = [
     path: '/operations'
   },
   {
-    text: 'Raporty',
-    icon: 'chart',
-    path: '/reports'
-  },
-  {
     text: 'Kategorie',
     icon: 'orderedlist',
     path: '/categories'
@@ -23,5 +18,10 @@ export const navigation = [
     text: 'Konta',
     icon: 'card',
     path: '/accounts'
+  },
+  {
+    text: 'Raporty',
+    icon: 'chart',
+    path: '/reports'
   }
 ];

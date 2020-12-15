@@ -19,32 +19,59 @@ export class ReportsComponent implements AfterViewInit {
   constructor(private operationService: OperationService,
               private currencyPipe: CurrencyPipe) {
     this.customizeTooltip = this.customizeTooltip.bind(this);
-    this.operationService.getOperations().subscribe((operation) => {
+    this.operationService.getOperations().subscribe((operation: any) => {
+      operation.forEach((op) => {
+        if (op.category.parent.type === 'expense') {
+          op.amount *= -1;
+        }
+      });
       this.dataSource = {
         fields: [{
-          caption: 'Kategoria',
+          caption: 'Kategoria główna',
           width: 120,
           dataField: 'category.parent.title',
-          area: 'row'
+          area: 'row',
+          displayFolder: 'Kategorie'
         }, {
           caption: 'Podkategoria',
           width: 120,
           dataField: 'category.title',
-          area: 'row'
+          area: 'row',
+          displayFolder: 'Kategorie'
         }, {
-          caption: 'Data',
+          caption: 'Nazwa',
+          width: 120,
+          dataField: 'account.name',
+          area: 'filter',
+          displayFolder: 'Konto'
+        }, {
+          caption: 'Data (rok)',
           dataField: 'operationDate',
           dataType: 'date',
-          area: 'column'
+          area: 'column',
+          groupInterval: 'year'
         }, {
-          caption: 'Operacje',
+          caption: 'Data (kwartał)',
+          dataField: 'operationDate',
+          dataType: 'date',
+          area: 'column',
+          groupInterval: 'quarter'
+        }, {
+          caption: 'Data (miesiąc)',
+          dataField: 'operationDate',
+          dataType: 'date',
+          area: 'column',
+          groupInterval: 'month'
+        }, {
+          caption: 'Kwota operacji',
           dataField: 'amount',
           dataType: 'number',
-          summaryType: 'sum',
           format: {type: 'currency', precision: 2},
-          area: 'data'
+          area: 'data',
+          summaryType: 'sum'
         }],
-        store: operation
+        store: operation,
+        retrieveFields: false
       };
     });
   }
@@ -52,13 +79,16 @@ export class ReportsComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.pivotGrid.instance.bindChart(this.chart.instance, {
       dataFieldsDisplayMode: 'splitPanes',
-      alternateDataFields: false
+      alternateDataFields: false,
+      processCell: (cellData) => {
+        cellData.chartDataItem.val = Math.abs(cellData.chartDataItem.val);
+        return cellData; // This line is optional
+      }
     });
   }
 
   customizeTooltip(args) {
     const valueText = args.originalValue.toFixed(2);
-
     return {
       html: args.seriesName + '<div class=\'currency\'>' + valueText + ' zł</div>'
     };

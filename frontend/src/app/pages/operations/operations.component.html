@@ -4,6 +4,7 @@
   showBorders="true"
   height="91vh"
   (onRowRemoving)="removeOpertion($event)"
+  (onRowUpdated)="onRowUpdated($event)"
   (onToolbarPreparing)="onToolbarPreparing($event)"
   (onCellPrepared)="onCellPrepared($event)"
   [showColumnLines]="true"
@@ -25,7 +26,7 @@
   </div>
 
   <dxo-editing
-    mode="popup"
+    mode="row"
     [allowUpdating]="true"
     [allowDeleting]="true">
   </dxo-editing>
@@ -37,46 +38,80 @@
   <dxo-header-filter
     [visible]="true">
   </dxo-header-filter>
-  <dxo-search-panel
-    [visible]="true"
-    [highlightCaseSensitive]="true">
-  </dxo-search-panel>
   <dxo-group-panel
     [visible]="true">
   </dxo-group-panel>
 
-  <dxi-column dataField="operationDate" dataType="date" [caption]="formatMessage('Date', null)"></dxi-column>
-  <dxi-column dataField="category.title" [caption]="formatMessage('Category', null)"></dxi-column>
-  <dxi-column dataField="category.parent.title" [caption]="formatMessage('Subcategory', null)"></dxi-column>
-  <dxi-column dataField="description" [caption]="formatMessage('Description', null)"></dxi-column>
-  <dxi-column dataField="account.name" [caption]="formatMessage('Account name', null)"></dxi-column>
-  <dxi-column dataField="amount" [format]="{type: 'currency', precision: 2}"  [caption]="formatMessage('Amount', null)"></dxi-column>
+  <dxi-column dataField="operationDate" dataType="date" [caption]="formatMessage('Date', null)">
+    <dxi-validation-rule type="required"></dxi-validation-rule>
+  </dxi-column>
+  <dxi-column dataField="category.parent.id" [setCellValue]="setCategoryValue" [caption]="formatMessage('Category', null)">
+    <dxi-validation-rule type="required"></dxi-validation-rule>
+    <dxo-lookup
+      [dataSource]="parentCategoryList"
+      valueExpr="id"
+      displayExpr="title">
+    </dxo-lookup>
+  </dxi-column>
+  <dxi-column dataField="category.id" [caption]="formatMessage('Subcategory', null)">
+    <dxi-validation-rule type="required"></dxi-validation-rule>
+    <dxo-lookup
+      [dataSource]="getFilteredSubcategories"
+      valueExpr="categoryId"
+      displayExpr="subcategory">
+    </dxo-lookup>
+  </dxi-column>
+  <dxi-column dataField="description" [caption]="formatMessage('Description', null)">
+    <dxi-validation-rule type="required"></dxi-validation-rule>
+  </dxi-column>
+  <dxi-column dataField="account.id" [caption]="formatMessage('Account name', null)">
+    <dxi-validation-rule type="required"></dxi-validation-rule>
+    <dxo-lookup
+      [dataSource]="accountList"
+      valueExpr="id"
+      displayExpr="name">
+    </dxo-lookup>
+  </dxi-column>
+  <dxi-column dataField="amount" [format]="{type: 'currency', precision: 2}"  [caption]="formatMessage('Amount', null)">
+    <dxi-validation-rule type="required"></dxi-validation-rule>
+  </dxi-column>
 
-<!--  <dxo-grouping [autoExpandAll]="true"></dxo-grouping>-->
+  <dxo-summary [calculateCustomSummary]="calculateGridSummaries">
+    <dxi-total-item
+      name="summaryRealIncome"
+      summaryType="custom"
+      valueFormat="currency"
+      [valueFormat]="{type: 'currency', precision: 2}"
+      displayFormat="Przychody: {0}"
+      showInColumn="amount">
+    </dxi-total-item>
+    <dxi-total-item
+      name="summaryRealExpense"
+      summaryType="custom"
+      valueFormat="currency"
+      [valueFormat]="{type: 'currency', precision: 2}"
+      displayFormat="Wydatki: {0}"
+      showInColumn="amount">
+    </dxi-total-item>
+    <dxi-total-item
+      name="summaryRealDiff"
+      summaryType="custom"
+      valueFormat="currency"
+      [valueFormat]="{type: 'currency', precision: 2}"
+      displayFormat="Bilans: {0}"
+      showInColumn="amount">
+    </dxi-total-item>
 
-<!--  <dxo-summary>-->
-<!--    <dxi-group-item-->
-<!--      column="plan"-->
-<!--      summaryType="sum"-->
-<!--      valueFormat="currency"-->
-<!--      [showInGroupFooter]="false"-->
-<!--      [alignByColumn]="true">-->
-<!--    </dxi-group-item>-->
-<!--    <dxi-group-item-->
-<!--      column="real"-->
-<!--      summaryType="sum"-->
-<!--      valueFormat="currency"-->
-<!--      [showInGroupFooter]="false"-->
-<!--      [alignByColumn]="true">-->
-<!--    </dxi-group-item>-->
-<!--    <dxi-group-item-->
-<!--      column="difference"-->
-<!--      summaryType="sum"-->
-<!--      valueFormat="currency"-->
-<!--      [alignByColumn]="true"-->
-<!--      [showInGroupFooter]="false">-->
-<!--    </dxi-group-item>-->
-<!--  </dxo-summary>-->
+    <dxi-total-item
+      name="summaryAccountSum"
+      summaryType="custom"
+      valueFormat="currency"
+      [valueFormat]="{type: 'currency', precision: 2}"
+      displayFormat="Łączny stan kont: {0}"
+      showInColumn="operationDate">
+    </dxi-total-item>
+
+  </dxo-summary>
 </dx-data-grid>
 
 <dx-speed-dial-action

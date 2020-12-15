@@ -27,16 +27,35 @@ class CategoryServiceImpl (private val categoryRepository: CategoryRepository,
                 Category(id = null, user = user, parent = parentCategory, title = createCategoryDTO.subcategoryName, type = null, orderNum = orderNum)).id!!
     }
 
-    override fun updateCategory(createCategoryDTO: CreateCategoryDTO, categoryId: Long, userIdFromContext: Long): Long {
+    override fun updateCategory(subcategoryName: String, categoryId: Long): Long {
         val category = categoryRepository.findById(categoryId)
-//        category.get().title = createCategoryDTO.categoryName
-//        category.get().type = createCategoryDTO.categoryType
-//        category.get().orderNum = createCategoryDTO.orderNum
+        category.get().title = subcategoryName
         return categoryRepository.save(category.get()).id!!
     }
 
     override fun getOnlyParentCategoryList(userIdFromContext: Long?): List<Category> {
         return categoryRepository.findAllByParentIsNullAndUserIdOrderByOrderNum(userIdFromContext!!)
+    }
+
+    override fun reorderCategory(toIndex: Int, categoryId: Long, userIdFromContext: Long) {
+        val categoryList = categoryRepository.findAllByParentIsNotNullAndUserIdOrderByOrderNum(userIdFromContext)
+        val categoryToReorder = categoryRepository.findById(categoryId).get()
+        val reorderToBiggerIndex = categoryList[toIndex].orderNum!! > categoryToReorder.orderNum!!
+        val tempIndex = categoryToReorder.orderNum
+        categoryToReorder.orderNum = categoryList[toIndex].orderNum
+        for (category in categoryList) {
+            if (reorderToBiggerIndex) {
+                if (category.id != categoryId && category.orderNum!! > tempIndex!! && category.orderNum!! <= categoryToReorder.orderNum!!) {
+                    category.orderNum = category.orderNum!! - 1
+                }
+            } else {
+                if (category.id != categoryId && category.orderNum!! < tempIndex!! && category.orderNum!! >= categoryToReorder.orderNum!!) {
+                    category.orderNum = category.orderNum!! + 1
+                }
+            }
+        }
+        categoryRepository.saveAll(categoryList)
+        categoryRepository.save(categoryToReorder)
     }
 
     override fun deleteCategory(categoryId: Long) {

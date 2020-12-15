@@ -1,5 +1,4 @@
-<div style="margin-top: 40px">
-<dx-chart id="sales-chart">
+<dx-chart id="operations-chart">
   <dxo-common-series-settings type="bar"></dxo-common-series-settings>
   <dxo-size [height]="320"></dxo-size>
   <dxo-adaptive-layout [width]="450"></dxo-adaptive-layout>
@@ -13,15 +12,14 @@
                [height]="440"
                [showBorders]="true"
                [dataSource]="dataSource">
-  <dxo-field-chooser [enabled]="false"></dxo-field-chooser>
+  <dxo-field-chooser [enabled]="true"></dxo-field-chooser>
   <dxo-field-panel
-    [showDataFields]="false"
+    [showDataFields]="true"
     [showRowFields]="true"
-    [showColumnFields]="false"
+    [showColumnFields]="true"
     [showFilterFields]="false"
     [allowFieldDragging]="true"
     [visible]="true">
   </dxo-field-panel>
 
 </dx-pivot-grid>
-</div>

@@ -7,5 +7,6 @@ data class CategoryDTO(
         var category: String? = null,
         var subcategory: String? = null,
         var type: CategoryType,
-        var parentOrdNumber: Int
+        var parentOrdNumber: Int,
+        var parentCategoryId: Long
 )

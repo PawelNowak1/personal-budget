@@ -22,6 +22,11 @@ export class CategoriesService {
     return this.http.post(`${HttpHelper.baseURL}/categories/create`, categoryData);
   }
 
+  updateCategory(categoryId: number, subcategory: string) {
+    return this.http.post(`${HttpHelper.baseURL}/categories/update/${categoryId}`, subcategory);
+  }
+
+
   deleteCategory(id: any) {
     return this.http.delete(`${HttpHelper.baseURL}/categories/delete/${id}`);
   }

@@ -35,6 +35,28 @@ class OperationServiceImpl (private val accountRepository: AccountRepository,
         return operationRepository.save(operation).id
     }
 
+    override fun updateOperation(createOperationDTO: CreateOperationDTO, userIdFromContext: Long?): Long {
+        val operation = operationRepository.findById(createOperationDTO.operationId!!).get()
+        if (operation.category?.parent?.type == CategoryType.INCOME) {
+            operation.account.amount -= operation.amount
+        } else {
+            operation.account.amount += operation.amount
+        }
+
+        val editedAccount = accountRepository.findById(createOperationDTO.accountId)
+        val editedCategory = categoryRepository.findById(createOperationDTO.categoryId)
+        operation.account = editedAccount.get()
+        operation.operationDate = createOperationDTO.operationDate
+        operation.amount = createOperationDTO.amount
+        operation.description = createOperationDTO.description
+        operation.category = editedCategory.get()
+        if (editedCategory.get().parent?.type == CategoryType.INCOME)
+            editedAccount.get().amount += operation.amount
+        else
+            editedAccount.get().amount -= operation.amount
+        return operationRepository.save(operation).id
+    }
+
     override fun getOperations(month: Int?, year: Int?, userIdFromContext: Long): List<Operation> {
         if (month == null && year == null) {
             return operationRepository.findAllByAccountUserId(userIdFromContext)

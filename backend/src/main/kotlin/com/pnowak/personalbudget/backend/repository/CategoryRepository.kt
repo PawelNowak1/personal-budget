@@ -5,4 +5,5 @@ import org.springframework.data.repository.CrudRepository
 
 interface CategoryRepository : CrudRepository<Category, Long> {
     fun findAllByParentIsNullAndUserIdOrderByOrderNum(userId: Long): List<Category>
+    fun findAllByParentIsNotNullAndUserIdOrderByOrderNum(userId: Long): List<Category>
 }

@@ -43,7 +43,13 @@ class CategoryController(val budgetService: BudgetService,
     }
 
     @PostMapping("/update/{categoryId}")
-    fun updateCategory(@RequestBody createCategoryDTO: CreateCategoryDTO, @PathVariable categoryId: Long): ResponseEntity<Long?> {
-        return ResponseEntity.ok(categoryService.updateCategory(createCategoryDTO, categoryId, getUserIdFromContext()!!))
+    fun updateCategory(@RequestBody subcategoryName: String, @PathVariable categoryId: Long): ResponseEntity<Long?> {
+        return ResponseEntity.ok(categoryService.updateCategory(subcategoryName, categoryId))
+    }
+
+    @PostMapping("/reorder/{categoryId}")
+    fun reorderCategory(@RequestBody toIndex: Int, @PathVariable categoryId: Long): ResponseEntity<Long> {
+        categoryService.reorderCategory(toIndex, categoryId, getUserIdFromContext()!!)
+        return ResponseEntity.ok(1L)
     }
 }

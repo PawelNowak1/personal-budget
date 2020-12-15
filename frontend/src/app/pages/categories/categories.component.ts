@@ -22,7 +22,7 @@ export class CategoriesComponent {
   ];
 
   constructor(private categoriesService: CategoriesService) {
-    this.categoriesService.getCategoryList().subscribe((result) => this.categories = result);
+    this.refreshGrid();
   }
 
   onReorder(e) {
@@ -30,6 +30,18 @@ export class CategoriesComponent {
 
   refreshGrid() {
     this.categoriesService.getCategoryList().subscribe((result) => this.categories = result);
+  }
+
+  onRowUpdated(event) {
+    this.categoriesService.updateCategory(event.data.categoryId, event.data.subcategory).subscribe(() => {
+      notify({
+        message: 'Zmieniono nazwę kategorii!',
+        type: 'info',
+        displayTime: 4000,
+        position: 'top'
+      });
+      this.refreshGrid();
+    });
   }
 
   removeCategory(event) {

@@ -9,4 +9,5 @@ class CreateOperationDTO {
     var description: String? = ""
     var categoryId: Long = -1
     var amount: BigDecimal = BigDecimal.ZERO
+    var operationId: Long? = null
 }

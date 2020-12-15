@@ -13,6 +13,10 @@ export class OperationService {
     return this.http.post(`${HttpHelper.baseURL}/operation/create`, operationData);
   }
 
+  updateOperation(operationData: any) {
+    return this.http.post(`${HttpHelper.baseURL}/operation/update`, operationData);
+  }
+
   getOperations(month?: number, year?: number) {
     if (month && year) {
       const params = new HttpParams().set('month', (month + 1).toString()).set('year', year.toString());

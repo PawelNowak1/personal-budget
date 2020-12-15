@@ -24,6 +24,12 @@ class OperationController(val operationService: OperationService) {
         return ResponseEntity.ok(operationService.createOperation(createAccountDTO, getUserIdFromContext()))
     }
 
+    @PostMapping("/update")
+    fun updateOperation(@RequestBody createAccountDTO: CreateOperationDTO): ResponseEntity<Long> {
+        return ResponseEntity.ok(operationService.updateOperation(createAccountDTO, getUserIdFromContext()))
+    }
+
+
     @GetMapping("/get")
     fun getOperations(@RequestParam(required = false) month: Int?,
                       @RequestParam(required = false) year: Int?) : ResponseEntity<List<Operation>> {

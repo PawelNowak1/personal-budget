@@ -1,11 +1,10 @@
-<div style="display: flex; justify-content: flex-end; margin-right: 40px; margin-top: 15px; margin-bottom: 5px">
-</div>
 <dx-data-grid
   width="100%"
   height="91vh"
   showColumnLines="true"
   showBorders="true"
   (onRowRemoving)="removeCategory($event)"
+  (onRowUpdated)="onRowUpdated($event)"
   [showColumnLines]="true"
   [showRowLines]="true"
   [showBorders]="true"
@@ -14,15 +13,15 @@
   [allowColumnReordering]="true"
   [dataSource]="categories">
   <dxo-editing
-    mode="popup"
+    mode="cell"
     [allowUpdating]="true"
     [allowDeleting]="true">
   </dxo-editing>
-  <dxo-row-dragging
-    [onReorder]="onReorder"
-    [allowReordering]="true"
-    [showDragIcons]="true"
-  ></dxo-row-dragging>
+<!--  <dxo-row-dragging-->
+<!--    [onReorder]="onReorder"-->
+<!--    [allowReordering]="true"-->
+<!--    [showDragIcons]="true"-->
+<!--  ></dxo-row-dragging>-->
   <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
   <dxo-state-storing [enabled]="true" type="localStorage" storageKey="storageCat"></dxo-state-storing>
   <dxo-filter-row
@@ -44,13 +43,13 @@
     [visible]="true">
   </dxo-group-panel>
 
-  <dxi-column dataField="category" [caption]="formatMessage('Category', null)">
+  <dxi-column dataField="category" [allowEditing]="false" [caption]="formatMessage('Category', null)">
     <dxi-validation-rule type="required"></dxi-validation-rule>
   </dxi-column>
   <dxi-column dataField="subcategory" [caption]="formatMessage('Subcategory', null)">
     <dxi-validation-rule type="required"></dxi-validation-rule>
   </dxi-column>
-  <dxi-column dataField="type" [caption]="formatMessage('Category type', null)">
+  <dxi-column dataField="type" [allowEditing]="false"  [caption]="formatMessage('Category type', null)">
     <dxi-validation-rule type="required"></dxi-validation-rule>
     <dxo-lookup
       [dataSource]="categoryTypes"

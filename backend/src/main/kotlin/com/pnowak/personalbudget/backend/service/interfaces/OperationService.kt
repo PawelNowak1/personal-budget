@@ -8,4 +8,5 @@ interface OperationService {
     fun getOperations(month: Int?, year: Int?, userIdFromContext: Long): List<Operation>
     fun getOperations(userIdFromContext: Long): List<Operation>
     fun deleteOperation(operationId: Long)
+    fun updateOperation(createOperationDTO: CreateOperationDTO, userIdFromContext: Long?): Long
 }

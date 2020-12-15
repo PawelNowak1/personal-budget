@@ -67,6 +67,10 @@ export class AddOperationComponent implements OnInit {
     });
   }
 
+  refreshAccountList() {
+    this.accountService.getAccountList(true).subscribe(result => this.accountList = result);
+  }
+
   nextOperationFalse = () => {
     this.addOperation(false);
   }

@@ -44,12 +44,13 @@ class BudgetServiceImpl(private val jdbcTemplate: NamedParameterJdbcTemplate,
                 "       (select c2.type from category c2 where c2.id = c.id_parent) as type,\n" +
                 "       c.title as sub_category,\n" +
                 "       (select c2.title from category c2 where c2.id = c.id_parent) as category,\n" +
+                "       (select c2.id from category c2 where c2.id = c.id_parent) as parent_category_id,\n" +
                 "       (select c2.order_num from category c2 where c2.id = c.id_parent) as parentOrdNum\n" +
                 "FROM\n" +
                 "    category c where c.id_parent is not null and c.user_id = :user_id ORDER BY c.order_num"
 
         return jdbcTemplate.query(sql, hashMapOf(Pair("user_id", userId)), RowMapper { rs, _ ->
-                CategoryDTO(rs.getLong("ID"), rs.getString("category"), rs.getString("sub_category"), CategoryType.fromInt(rs.getInt("type")), rs.getInt("parentOrdNum"))
+                CategoryDTO(rs.getLong("ID"), rs.getString("category"), rs.getString("sub_category"), CategoryType.fromInt(rs.getInt("type")), rs.getInt("parentOrdNum"), rs.getLong("parent_category_id"))
             })
     }
 
