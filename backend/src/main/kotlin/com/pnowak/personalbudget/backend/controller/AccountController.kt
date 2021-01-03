@@ -1,14 +1,10 @@
 package com.pnowak.personalbudget.backend.controller
 
-import com.pnowak.personalbudget.backend.dto.Budget
-import com.pnowak.personalbudget.backend.dto.CategoryDTO
 import com.pnowak.personalbudget.backend.dto.CreateAccountDTO
 import com.pnowak.personalbudget.backend.dto.MyUserDetails
 import com.pnowak.personalbudget.backend.entities.Account
 import com.pnowak.personalbudget.backend.service.interfaces.AccountService
-import com.pnowak.personalbudget.backend.service.interfaces.BudgetService
 import org.springframework.http.ResponseEntity
-import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.*
 import java.math.BigDecimal
@@ -30,7 +26,7 @@ class AccountController(val accountService: AccountService) {
     }
 
     @GetMapping("/list")
-    fun getCategories(@RequestParam(required = false) onlyActive: Boolean): ResponseEntity<List<Account>> {
+    fun getAccountList(@RequestParam(required = false) onlyActive: Boolean): ResponseEntity<List<Account>> {
         return ResponseEntity.ok(accountService.getAccountList(onlyActive, getUserIdFromContext()))
     }
 

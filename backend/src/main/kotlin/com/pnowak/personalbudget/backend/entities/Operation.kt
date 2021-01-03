@@ -6,12 +6,9 @@ import javax.persistence.*
 
 @Entity
 class Operation(
-
         @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Long = -1,
-
-        val name: String = "", // do usunięcia
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        val id: Long? = -1,
         var createDate: Date = Date(),
         var operationDate: Date = Date(),
         var description: String? = null,

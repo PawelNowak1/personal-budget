@@ -34,7 +34,10 @@ dependencies {
 	//implementation("io.springfox:springfox-swagger2:2.7.0")
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+		exclude(module = "mockito-core")
 	}
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+	testImplementation("com.ninja-squad:springmockk:1.1.3")
 }
 
 tasks.withType<Test> {

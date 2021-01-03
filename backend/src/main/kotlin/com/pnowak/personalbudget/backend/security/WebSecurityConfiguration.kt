@@ -1,7 +1,5 @@
-package com.pnowak.personalbudget.backend.configuration
+package com.pnowak.personalbudget.backend.security
 
-import com.pnowak.personalbudget.backend.security.AuthEntryPoint
-import com.pnowak.personalbudget.backend.security.TokenAuthenticationFilter
 import com.pnowak.personalbudget.backend.service.interfaces.UserDetailsService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

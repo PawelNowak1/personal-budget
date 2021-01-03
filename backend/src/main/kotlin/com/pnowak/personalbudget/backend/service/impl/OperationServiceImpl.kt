@@ -1,14 +1,11 @@
 package com.pnowak.personalbudget.backend.service.impl
 
 import com.pnowak.personalbudget.backend.dto.CreateOperationDTO
-import com.pnowak.personalbudget.backend.entities.Account
 import com.pnowak.personalbudget.backend.entities.Operation
 import com.pnowak.personalbudget.backend.enums.CategoryType
 import com.pnowak.personalbudget.backend.repository.AccountRepository
 import com.pnowak.personalbudget.backend.repository.CategoryRepository
 import com.pnowak.personalbudget.backend.repository.OperationRepository
-import com.pnowak.personalbudget.backend.repository.UserRepository
-import com.pnowak.personalbudget.backend.service.interfaces.AccountService
 import com.pnowak.personalbudget.backend.service.interfaces.OperationService
 import org.springframework.stereotype.Service
 import java.time.LocalDate
@@ -32,7 +29,7 @@ class OperationServiceImpl (private val accountRepository: AccountRepository,
             account.get().amount += operation.amount
         else
             account.get().amount -= operation.amount
-        return operationRepository.save(operation).id
+        return operationRepository.save(operation).id!!
     }
 
     override fun updateOperation(createOperationDTO: CreateOperationDTO, userIdFromContext: Long?): Long {
@@ -54,7 +51,7 @@ class OperationServiceImpl (private val accountRepository: AccountRepository,
             editedAccount.get().amount += operation.amount
         else
             editedAccount.get().amount -= operation.amount
-        return operationRepository.save(operation).id
+        return operationRepository.save(operation).id!!
     }
 
     override fun getOperations(month: Int?, year: Int?, userIdFromContext: Long): List<Operation> {
