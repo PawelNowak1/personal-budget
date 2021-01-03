@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import {formatMessage} from 'devextreme/localization';
-import {first} from "rxjs/operators";
-import notify from "devextreme/ui/notify";
-import {AuthService} from "../../services";
-import {Router} from "@angular/router";
+import {first} from 'rxjs/operators';
+import notify from 'devextreme/ui/notify';
+import {AuthService} from '../../services';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-account-form',

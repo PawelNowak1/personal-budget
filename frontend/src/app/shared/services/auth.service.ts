@@ -60,7 +60,7 @@ export class AuthGuardService implements CanActivate {
 
     if (isLoggedIn && (isLoginForm || isCreateAccForm)) {
       this.authService.lastAuthenticatedPath = defaultPath;
-      this.router.navigate([defaultPath]);
+      this.router.navigate([defaultPath]).then();
       return false;
     }
 
@@ -69,7 +69,7 @@ export class AuthGuardService implements CanActivate {
     }
 
     if (!isLoggedIn && !isLoginForm) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login']).then();
     }
 
     if (isLoggedIn) {

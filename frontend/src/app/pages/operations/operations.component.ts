@@ -133,19 +133,10 @@ export class OperationsComponent {
   }
 
   setCategoryValue(newData, value, currentRowData) {
-    console.log(newData);
-    console.log(value);
-    console.log(currentRowData);
     newData.category = currentRowData.category;
     newData.category.id = null;
     (this as any).defaultSetCellValue(newData, value);
   }
-
-  // setCategoryValue(rowData: any, value: any): void {
-  //   console.log(rowData);
-  //   rowData.category.id = null;
-  //   (this as any).defaultSetCellValue(rowData, value);
-  // }
 
   getFilteredSubcategories(options) {
     console.log(options);

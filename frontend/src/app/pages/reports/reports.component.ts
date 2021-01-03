@@ -2,12 +2,10 @@ import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import { formatMessage } from 'devextreme/localization';
 import {OperationService} from '../../shared/services/operation.service';
 import {DxChartComponent, DxPivotGridComponent} from 'devextreme-angular';
-import { CurrencyPipe } from '@angular/common';
 
 @Component({
   templateUrl: './reports.component.html',
-  styleUrls: ['./reports.component.css'],
-  providers: [CurrencyPipe]
+  styleUrls: ['./reports.component.css']
 })
 export class ReportsComponent implements AfterViewInit {
   @ViewChild(DxPivotGridComponent, { static: false }) pivotGrid: DxPivotGridComponent;
@@ -16,8 +14,7 @@ export class ReportsComponent implements AfterViewInit {
   dataSource: any;
   formatMessage = formatMessage;
 
-  constructor(private operationService: OperationService,
-              private currencyPipe: CurrencyPipe) {
+  constructor(private operationService: OperationService) {
     this.customizeTooltip = this.customizeTooltip.bind(this);
     this.operationService.getOperations().subscribe((operation: any) => {
       operation.forEach((op) => {

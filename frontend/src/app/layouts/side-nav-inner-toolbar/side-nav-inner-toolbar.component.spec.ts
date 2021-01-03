@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SideNavInnerToolbarComponent } from './side-nav-inner-toolbar.component';
+import {RouterTestingModule} from '@angular/router/testing';
+import {AuthService} from '../../shared/services';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('SideNavInnerToolbarComponent', () => {
   let component: SideNavInnerToolbarComponent;
@@ -8,7 +11,9 @@ describe('SideNavInnerToolbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SideNavInnerToolbarComponent ]
+      declarations: [ SideNavInnerToolbarComponent ],
+      imports: [ RouterTestingModule, HttpClientTestingModule ],
+      providers: [AuthService]
     })
     .compileComponents();
   });

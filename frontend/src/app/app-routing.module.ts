@@ -55,7 +55,6 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  // for routing debug use: RouterModule.forRoot(routes, {enableTracing: true}),
   imports: [RouterModule.forRoot(routes),
     DxCalendarModule, DxDateBoxModule, DxValidationGroupModule, DevExtremeModule, SharedModule],
   providers: [AuthGuardService],

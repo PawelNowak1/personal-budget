@@ -56,14 +56,13 @@
   "Type name of account": "Podaj nazwę konta",
   "Account name": "Nazwa konta",
   "dxCollectionWidget-noDataText": "Brak danych",
-
   "dxDropDownEditor-selectLabel": "Wybierz",
-
   "validation-required": "Wymagane",
   "validation-required-formatted": "{0} jest wymagana",
-  "validation-numeric": "La valeur doit être un nombre",
-  "validation-numeric-formatted": "{0} doit être un nombre",
-  "validation-range": "La valeur ne se trouve pas dans la plage valide",
+  "validation-numeric": "Wartość musi być liczbą",
+  "validation-numeric-formatted": "{0} wartość musi być liczbą",
+
+  "validation-range": "Wartość jest poza przedziałem",
   "validation-range-formatted": "{0} ne se trouve pas dans la plage valide",
   "validation-stringLength": "La longueur de la valeur est incorrecte",
   "validation-stringLength-formatted": "La longueur de {0} est incorrecte",

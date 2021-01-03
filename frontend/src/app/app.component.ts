@@ -12,7 +12,7 @@ import plMessages from './../assets/locale/pl.json';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'Budżet domowy';
 
   constructor(private authService: AuthService, private http: HttpClient) {
     loadMessages(plMessages);
