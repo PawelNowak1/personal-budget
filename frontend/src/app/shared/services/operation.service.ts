@@ -19,7 +19,9 @@ export class OperationService {
 
   getOperations(month?: number, year?: number) {
     if ((month === 0 || month) && year) {
-      const params = new HttpParams().set('month', (month + 1).toString()).set('year', year.toString());
+      const params = new HttpParams()
+        .set('month', (month + 1).toString())
+        .set('year', year.toString());
       return this.http.get(`${HttpHelper.baseURL}/operation/get`, {params});
     } else {
       return this.http.get(`${HttpHelper.baseURL}/operation/get`);

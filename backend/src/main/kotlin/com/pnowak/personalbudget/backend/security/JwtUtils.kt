@@ -10,8 +10,8 @@ import java.util.*
 
 @Component
 class JwtUtils {
-    private val JWT_SECRET = "JWT_SECRET_KEY"
-    private val JWT_EXPIRATION = 60 * 60 * 1000
+    private val JWT_SECRET = "JWT_SECRET_KEY" // for demo purpose, in production should use environmental variable
+    private val JWT_EXPIRATION = 60 * 60 * 10000
     fun generateJwtToken(authentication: Authentication): String {
         val userDetails: MyUserDetails = authentication.principal as MyUserDetails
         return Jwts.builder()
@@ -32,7 +32,7 @@ class JwtUtils {
     }
 
     fun getUsernameFromJwtToken(token: String?): String {
-        return Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token).getBody().getSubject()
+        return Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token).body.subject
     }
 
     fun validateJwtToken(token: String?): Boolean {
